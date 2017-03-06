@@ -1,0 +1,9 @@
+{
+  "name": "rummy-rules",
+  "version": "1.0.0",
+  "description": "a set of functions to implement the basic rules of the card game rummy Edit",
+  "main": "index.js",
+  "repository": "git@github.com:tfpractice/rummy-rules.git",
+  "author": "theory friction practice <jackson.brebnor@gmail.com>",
+  "license": "MIT"
+}
