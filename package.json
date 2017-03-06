@@ -65,5 +65,8 @@
     "unmockedModulePathPatterns": [
       "jasmine-expect"
     ]
+  },
+  "dependencies": {
+    "bee52": "^1.0.0"
   }
 }
