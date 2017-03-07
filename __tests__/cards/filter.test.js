@@ -1,14 +1,12 @@
 import 'jasmine-expect';
-
 import { byAdj, } from 'src/cards/filter';
 import { deck, shuffle, } from 'src/deck';
 
 const myDeck = shuffle(deck());
 
-console.log((byAdj(myDeck)(myDeck[0])));
 describe('filter', () => {
   describe('byAdj', () => {
-    it('filters an array of nodes to those which are adjacent to the givebn node', () => {
+    it('filters an array of nodes to those which are adjacent to the given node', () => {
       expect(byAdj(myDeck)(myDeck[0])).toBeArray();
       expect(byAdj(myDeck)(myDeck[0]).length).toBe(2);
     });
