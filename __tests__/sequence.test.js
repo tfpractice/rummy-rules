@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hasNext, isAdj,rankDiff,rankSort, } from 'src/sequence';
+import { hasNext, hasRank,isAdj,rankDiff,rankSort, } from 'src/sequence';
 
 const { shuffle, deck, } = Deck;
 const myDeck = deck();
@@ -25,6 +25,11 @@ describe('sequence', () => {
   describe('rankSort', () => {
     it('sorts the cards by rank', () => {
       expect(rankSort(shuffle(myCards))).toEqual(myCards);
+    });
+  });
+  describe('hasRank', () => {
+    it('check a card for its rank', () => {
+      expect(hasRank('3')(second)).toBeTrue();
     });
   });
   describe('isAdj', () => {

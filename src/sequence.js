@@ -3,10 +3,10 @@ const { bySuit, byRank, } = Filter;
 const { sameSuit, rank, } = Card;
 const { nextRank,rankVal, } = Rank;
 
+export const hasRank = r => ({ rank, }) => r === rank;
+
 export const hasNext = ({ rank,suit, }) => cards =>
   byRank(nextRank(rank))(cards).some(sameSuit({ suit, }));
-
-export const hasRank = r => ({ rank, }) => r === rank;
 
 export const rankDiff = (a,b) => rankVal(rank(a)) - rankVal(rank(b));
 export const rankSort = cards => cards.sort(rankDiff);
