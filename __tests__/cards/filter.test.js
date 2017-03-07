@@ -5,6 +5,7 @@ import { deck, shuffle, } from 'src/deck';
 
 const myDeck = shuffle(deck());
 
+console.log((byAdj(myDeck)(myDeck[0])));
 describe('filter', () => {
   describe('byAdj', () => {
     it('filters an array of nodes to those which are adjacent to the givebn node', () => {

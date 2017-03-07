@@ -23,6 +23,7 @@ describe('compare', () => {
     it('checks if two cards have a rankDiff of 1', () => {
       expect(rankAdj(d2)(d3)).toBeTrue();
       expect(rankAdj(c2)(d3)).toBeTrue();
+      expect(rankAdj(c2)(c2)).toBeTrue();
     });
   });
   describe('isAdj', () => {
