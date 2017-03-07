@@ -13,7 +13,6 @@ describe('hand', () => {
   });
   describe('handGraph', () => {
     it('retuns a map of cards ', () => {
-      console.log(handGraph(...hand(myDeck)));
       expect(handGraph(...hand(myDeck)) instanceof Map).toBeTrue();
     });
   });

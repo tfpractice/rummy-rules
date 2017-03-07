@@ -39,8 +39,6 @@ describe('sequence', () => {
   });
   describe('sequence', () => {
     it('return an array of neighboring cards', () => {
-      console.log('sequence(second)(myCards)',sequence(myCards)(second));
-      console.log('myCards.map(sequence)',myCards.map(sequence(myCards)));
       expect(sequence(myCards)(second)).toBeArray();      
     });
   });
