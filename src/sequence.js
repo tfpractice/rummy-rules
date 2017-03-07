@@ -8,5 +8,6 @@ export const hasNext = ({ rank,suit, }) => cards =>
 
 export const rankDiff = (a,b) => rankVal(rank(a)) - rankVal(rank(b));
 export const rankSort = cards => cards.sort(rankDiff);
+export const nextBin = (cards,b) => hasNext(b)(cards);
 
 // bySuit(suit)(cards).some(sameRank({ rank: nextRank(rank), }));
