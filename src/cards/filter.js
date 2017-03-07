@@ -1,1 +1,2 @@
-// import { hasSuit, hasRank } from 'module';
+import { isAdj, } from './compare';
+export const byAdj = arr => c => arr.filter(isAdj(c));
