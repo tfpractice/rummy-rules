@@ -1,14 +1,29 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hand, } from 'src/hand';
+import { hasNext, rankDiff,rankSort, } from 'src/sequence';
 
 const { shuffle, deck, } = Deck;
-const myDeck = shuffle(deck());
+const myDeck = deck();
+const myShuff = shuffle(myDeck);
+const myCards = Deck.draw(7)(deck());
+const first = myCards[0];
 
-describe('hand', () => {
-  describe('hand', () => {
-    it('retrieves 7 cards from a deck', () => {
-      expect(hand(myDeck).length).toEqual(7);
+describe('sequence', () => {
+  describe('hasNext', () => {
+    it('finds the next ranking card given a suit', () => {
+      expect((myCards).length).toEqual(7);
+      expect(hasNext(first)(myCards)).toBeTruthy();
+      expect(hasNext(first)(myCards.slice(3))).toBeFalse();
+    });
+  });
+  describe('rankDiff', () => {
+    it('returns the difference in rankVal of two cards', () => {
+      expect(rankDiff(first,myCards[1])).toEqual(-1);
+    });
+  });
+  describe('rankSort', () => {
+    it('sorts the cards by rank', () => {
+      expect(rankSort(shuffle(myCards))).toEqual(myCards);
     });
   });
 });
