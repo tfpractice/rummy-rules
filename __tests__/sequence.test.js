@@ -1,12 +1,13 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hasNext, rankDiff,rankSort, } from 'src/sequence';
+import { hasNext, isAdj,rankDiff,rankSort, } from 'src/sequence';
 
 const { shuffle, deck, } = Deck;
 const myDeck = deck();
 const myShuff = shuffle(myDeck);
 const myCards = Deck.draw(7)(deck());
 const first = myCards[0];
+const second = myCards[1];
 
 describe('sequence', () => {
   describe('hasNext', () => {
@@ -24,6 +25,11 @@ describe('sequence', () => {
   describe('rankSort', () => {
     it('sorts the cards by rank', () => {
       expect(rankSort(shuffle(myCards))).toEqual(myCards);
+    });
+  });
+  describe('isAdj', () => {
+    it('checks for a rankDiff of 1', () => {
+      expect(isAdj(first)(second)).toBeTruthy();
     });
   });
 });
