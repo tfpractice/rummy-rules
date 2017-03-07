@@ -13,12 +13,16 @@ export default {
       { dest: 'dist/bundle.cjs.js', format: 'cjs', },
       { dest: 'dist/bundle.umd.js', format: 'umd', },
   ],
-  moduleId: 'bee52',
-  moduleName: 'bee52',
+  moduleId: 'rummy-rules',
+  moduleName: 'rummy-rules',
   sourceMap: true,
   exports: 'named',
+  external: [ 'bee52', ],
+  globals: { bee52: 'bee52', },
   plugins: [
-    nodeResolve({ skip: [ 'anagramica', ], }),
+    nodeResolve(),
+
+    // nodeResolve({ skip: [ 'bee52', ], }),
     commonjs(),
     babel({
       exclude: 'node_modules/**',

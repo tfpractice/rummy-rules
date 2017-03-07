@@ -9,11 +9,12 @@ export default {
     entry: 'src/index.js',
     dest: 'dist/bundle.es6.js',
     format: 'es',
-    moduleId: 'bee52',
-    moduleName: 'bee52',
+    moduleId: 'rummy-rules',
+    moduleName: 'rummy-rules',
+    external: [ 'bee52', ],
     sourceMap: true,
     plugins: [
-      nodeResolve({ skip: [ 'anagramica', ], }),
+      nodeResolve({ skip: [ 'bee52', ], }),
       commonjs(),
       babel({
         exclude: 'node_modules/**',
