@@ -11,10 +11,10 @@ export default {
     format: 'es',
     moduleId: 'rummy-rules',
     moduleName: 'rummy-rules',
-    external: [ 'bee52', ],
+    external: [ 'bee52','graph-curry', ],
     sourceMap: true,
     plugins: [
-      nodeResolve({ skip: [ 'bee52', ], }),
+      nodeResolve({ skip: [ 'bee52','graph-curry', ], }),
       commonjs(),
       babel({
         exclude: 'node_modules/**',

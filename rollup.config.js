@@ -17,8 +17,8 @@ export default {
   moduleName: 'rummy-rules',
   sourceMap: true,
   exports: 'named',
-  external: [ 'bee52', ],
-  globals: { bee52: 'bee52', },
+  external: [ 'bee52','graph-curry', ],
+  globals: { bee52: 'bee52','graph-curry': 'graph-curry', },
   plugins: [
     nodeResolve(),
 
