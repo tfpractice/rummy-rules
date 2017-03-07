@@ -723,9 +723,9 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bee52@^1.0.3-0:
-  version "1.0.3-0"
-  resolved "https://registry.yarnpkg.com/bee52/-/bee52-1.0.3-0.tgz#e9e05da18efb2e333070768df8c60f69393eddda"
+bee52@^1.0.3-1:
+  version "1.0.3-1"
+  resolved "https://registry.yarnpkg.com/bee52/-/bee52-1.0.3-1.tgz#49b155a25df38c373efb5284ecc6cbf7ff310888"
 
 block-stream@*:
   version "0.0.9"

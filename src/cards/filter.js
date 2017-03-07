@@ -1,2 +1,1 @@
-// export * from './compare';
-// import * as Card from './card';
+// import { hasSuit, hasRank } from 'module';
