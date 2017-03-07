@@ -16,7 +16,7 @@ describe('compare', () => {
   });
   describe('rankDiff', () => {
     it('returns the rank difference', () => {
-      expect(rankOrder(d2)(d3)).toEqual(-1);
+      expect(rankDiff(d2)(d3)).toEqual(-1);
     });
   });
 });
