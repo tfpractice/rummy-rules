@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hasNext, hasRank,isAdj,rankDiff,rankSort, } from 'src/sequence';
+import { hasNext, hasRank,isAdj,rankDiff,rankSort,sequence, } from 'src/sequence';
 
 const { shuffle, deck, } = Deck;
 const myDeck = deck();
@@ -35,6 +35,13 @@ describe('sequence', () => {
   describe('isAdj', () => {
     it('checks for a rankDiff of 1', () => {
       expect(isAdj(first)(second)).toBeTruthy();
+    });
+  });
+  describe('sequence', () => {
+    it('return an array of neighboring cards', () => {
+      console.log('sequence(second)(myCards)',sequence(myCards)(second));
+      console.log('myCards.map(sequence)',);
+      expect(sequence(myCards)(second)).toBeArray();      
     });
   });
 });
