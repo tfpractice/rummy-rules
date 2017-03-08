@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { addCard, find, findPop, idx,remove,transfer, } from 'src/cards/mutate';
+import { addCard, drawTo, find, findPop,idx,remove, transfer, } from 'src/cards/mutate';
 import { deck, shuffle, } from 'src/deck';
 import { card, } from 'src/cards/card';
 const myDeck = (deck());
@@ -39,6 +39,19 @@ describe('mutate', () => {
     it('moves an element from one array to another', () => {
       expect(transfer(twoD)(myDeck)(myCards).length).toEqual(1);
       expect(transfer(twoD)(remove(twoD)(myDeck))(myCards).length).toEqual(0);
+    });
+  });
+  
+  describe('drawTo', () => {
+    describe('when the card is found in the array', () => {
+      it('returns a slice of the array from beginning including the index of the queried card', () => {
+        expect(drawTo(twoD)(myDeck).length).toEqual(14);
+      });
+    });
+    describe('when card is not in the array', () => {
+      it('returns an empty array', () => {
+        expect(drawTo(twoD)(myCards).length).toEqual(0);
+      });
     });
   });
 });
