@@ -12,6 +12,3 @@ export const hasSuit = s => c => s === suit(c);
 export const next = c => nextRank(rank(c));
 export const prev = c => prevRank(rank(c));
 export const adjRanks = c => [ prev(c), next(c), ]; 
-
-// export const 
-// export const nextRank = c=>

@@ -33,8 +33,8 @@ describe('join', () => {
   });
   describe('sequences', () => {
     it('returns the set of sequences in the cards', () => {
-      console.log(sequences(myDeck));
-      console.log(suitSets(myDeck));
+      // console.log(sequences(myDeck));
+      // console.log(suitSets(myDeck));
     });
   });
   describe('suits', () => {
