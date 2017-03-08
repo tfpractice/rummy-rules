@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { find, idx, remove, transfer, } from 'src/cards/mutate';
+import { addCard, find, findPop, idx,remove,transfer, } from 'src/cards/mutate';
 import { deck, shuffle, } from 'src/deck';
 import { card, } from 'src/cards/card';
 const myDeck = (deck());
@@ -17,18 +17,28 @@ describe('mutate', () => {
       expect(find(myDeck)(twoD)).toBeTruthy();
     });
   });
+  describe('findPop', () => {
+    it('retrieves and removes an element form an array', () => {
+      expect(findPop(twoD)(remove(twoD)(myDeck))).toBeFalsy();
+      expect(findPop(twoD)(myDeck)).toBeTruthy();
+    });
+  });
   describe('remove', () => {
-    it('splices the array at the index of a matching element', () => {
+    it('returns an array without the given card', () => {
       expect(remove(twoD)(myDeck)).toBeTruthy();
-      expect(myDeck.length).toEqual(51);
+
+      expect(remove(twoD)(myDeck).length).toEqual(51);
+    });
+  });
+  describe('addCard', () => {
+    it('adds a card to the collection', () => {
+      expect(addCard(twoD)([]).length).toEqual(1);
     });
   });
   describe('transfer', () => {
     it('moves an element from one array to another', () => {
-      console.log(myDeck);
-      console.log(transfer(twoD)(myDeck)(myCards));
-      expect(myDeck.length).toEqual(51);
-      expect(myCards.length).toEqual(1);
+      expect(transfer(twoD)(myDeck)(myCards).length).toEqual(1);
+      expect(transfer(twoD)(remove(twoD)(myDeck))(myCards).length).toEqual(0);
     });
   });
 });

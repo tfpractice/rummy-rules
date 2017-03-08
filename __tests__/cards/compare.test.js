@@ -1,6 +1,7 @@
 import 'jasmine-expect';
 import { card,copy,hasRank,hasSuit, } from 'src/cards/card';
-import { diffSuit,isAdj, isEquiv,rankAdj,rankDiff, rankOrder, } from 'src/cards/compare';
+import { diffSuit,isAdj, isEquiv,isMatch,rankAdj, rankDiff,rankOrder,
+xMatch, } from 'src/cards/compare';
 
 const d2 = card('2','DIAMONDS');
 const d3 = card('3','DIAMONDS');
@@ -38,10 +39,16 @@ describe('compare', () => {
       expect(diffSuit(cA)(c2)).toBeFalse();
     });
   });
-  describe('isEquiv', () => {
+  describe('isMatch', () => {
     it('checks for suit and rank equality', () => {
-      expect(isEquiv(c2)(c2)).toBeTrue();
-      expect(isEquiv(c2)(d2)).toBeFalse();
+      expect(isMatch(c2)(c2)).toBeTrue();
+      expect(isMatch(c2)(d2)).toBeFalse();
+    });
+  }); 
+  describe('xMatch', () => {
+    it('checks for suit and rank equality', () => {
+      expect(xMatch(c2)(c2)).toBeFalse();
+      expect(xMatch(c2)(d2)).toBeTrue();
     });
   });
 });
