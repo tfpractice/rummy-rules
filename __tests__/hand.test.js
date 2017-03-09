@@ -25,7 +25,6 @@ describe('hand', () => {
   
   describe('seqPlays', () => {
     it('returns the sets containing the poitential card', () => {
-      console.log(seqPoss(first)(myHand));
       expect(seqPlays(myDeck)).toBeArray();
     });
   }); describe('rankPlays', () => {
