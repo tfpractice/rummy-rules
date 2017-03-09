@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { allAces, penalty, points, score, scoreSet, seqScore, sumBin, total, } from 'src/score';
+import { allAces, deductions, penalty, points, score, scoreSet, sum,total, } from 'src/score';
 import { deck, } from 'src/deck';
 import { sequences, } from 'src/cards/join';
 const myDeck = (deck());
@@ -30,14 +30,14 @@ describe('score', () => {
       });
     });
   });
-  describe('sumBin', () => {
+  describe('sum', () => {
     it('adds the rankScore to the sum', () => {
-      expect(sumBin(10, 'a')).toEqual(20);  
+      expect(sum(10, 10)).toEqual(20);  
     });
   });
-  describe('seqScore', () => {
+  describe('score', () => {
     it('scores a sequence of cards', () => {
-      expect(seqScore(myDeck)).toEqual(360);
+      expect(score(myDeck)).toEqual(360);
     });
   });
   describe('allAces', () => {
@@ -62,6 +62,11 @@ describe('score', () => {
       
       expect(penalty('10')).toEqual(-10);
       expect(penalty('a')).toEqual(-15);
+    });
+    describe('deductions', () => {
+      it('accumulates all of the penalties', () => {
+        expect(deductions(myDeck.slice(26))).toEqual(-165);
+      });
     });
   });
 });
