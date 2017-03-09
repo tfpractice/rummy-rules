@@ -1,4 +1,4 @@
-import { append, popElem,removeSet, spread, } from 'fenugreek-collections';
+import { append, popElem, } from 'fenugreek-collections';
 import { isMatch, xMatch, } from './compare';
 
 export const idx = arr => c => [ ...arr, ].findIndex(isMatch(c));

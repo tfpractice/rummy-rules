@@ -5,4 +5,5 @@ const { graph, nodes, } = Graph;
 const { draw, } = Deck;
 
 export const hand = deck => draw(7)(deck);
-export const handGraph = graph;
+
+// export const sequences = hand=> sequences.filt
