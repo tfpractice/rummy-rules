@@ -1,4 +1,5 @@
 import { Card, Rank, } from 'bee52';
+
 const { nextRank, prevRank, } = Rank;
 
 export const { suit, rank, sameSuit, sameRank, } = Card;

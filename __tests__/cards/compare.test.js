@@ -1,12 +1,12 @@
 import 'jasmine-expect';
-import { card,copy,hasRank,hasSuit, } from 'src/cards/card';
-import { diffSuit,isAdj, isEquiv,isMatch,rankAdj, rankDiff,rankOrder,
-xMatch, } from 'src/cards/compare';
+import { card, } from 'src/cards/card';
+import { diffSuit,isAdj, isMatch,rankAdj, rankDiff,rankOrder,rankSort,xMatch, } from 'src/cards/compare';
 
 const d2 = card('2','DIAMONDS');
 const d3 = card('3','DIAMONDS');
 const c2 = card('2','CLUBS');
 const cA = card('a','CLUBS');
+
 const myCards = [ d2,d3,c2,cA, ];
 
 describe('compare', () => {
@@ -28,7 +28,7 @@ describe('compare', () => {
     });
   });
   describe('isAdj', () => {
-    it('checks if two cards are off the same suit and adjacent buy rank', () => {
+    it('checks if two cards are off the same suit of adjacent rank', () => {
       expect(isAdj(d2)(d3)).toBeTrue();
       expect(isAdj(c2)(d3)).toBeFalse();
     });
@@ -49,6 +49,12 @@ describe('compare', () => {
     it('checks for suit and rank equality', () => {
       expect(xMatch(c2)(c2)).toBeFalse();
       expect(xMatch(c2)(d2)).toBeTrue();
+    });
+  });
+  describe('rankSort', () => {
+    it('sorts an array by increasin rank', () => {
+      console.log(rankSort(myCards));
+      expect(rankSort(myCards)).toBeArray();
     });
   });
 });
