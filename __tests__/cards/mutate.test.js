@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { addCard, drawTo, find, findPop,idx,remove, transfer, } from 'src/cards/mutate';
-import { deck, shuffle, } from 'src/deck';
+import { deck, } from 'src/deck';
 import { card, } from 'src/cards/card';
 const myDeck = (deck());
 const twoD = card('2', 'DIAMONDS');

@@ -26,20 +26,27 @@ describe('join', () => {
       expect(joinSuit(myGraph, first) instanceof Map).toBeTruthy();
     });
   });
-  describe('sequence', () => {
+  describe('seq', () => {
     it('joins all the possible sequences in the cards', () => {
-      // console.log(seq(cGraph(deck())));
+      expect(seq(cGraph(deck())) instanceof Map).toBeTruthy();
+    });
+  });
+  describe('suits', () => {
+    it('joins all the suit connnections ', () => {
+      expect(suits(myDeck)).toBeArray();
     });
   });
   describe('sequences', () => {
     it('returns the set of sequences in the cards', () => {
       // console.log(sequences(myDeck));
+      expect(sequences(myDeck)).toBeArray();
+
       // console.log(suitSets(myDeck));
     });
   });
-  describe('suits', () => {
+  describe('suitSets', () => {
     it('joins all the possible suits in the cards', () => {
-      // console.log(suits(cGraph(deck())));
+      expect(suitSets(myDeck)).toBeArray();
     });
   });
 });

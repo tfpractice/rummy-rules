@@ -10,7 +10,7 @@ export const xMatch = c0 => c1 => !(isMatch(c0)(c1));
 
 export const rankDiff = a => b => rankVal(rank(a)) - rankVal(rank(b));
 export const rankOrder = (a, b) => rankDiff(a)(b);
-export const rankSort = cards => cards.sort(rankDiff);
+export const rankSort = cards => cards.sort(rankOrder);
 
 export const rankAdj = c0 => c1 => adjRanks(c0).map(hasRank).some(f => f(c1));
 export const suitAdj = c0 => c1 => [ diffSuit(c0), sameRank(c0), ].every(f => f(c1));
