@@ -1,9 +1,7 @@
 import 'jasmine-expect';
-import { Graph, } from 'graph-curry';
 import { deck, shuffle, } from 'src/deck';
 import { cGraph, joinAdj, joinSuit, seq, sequences, suits, suitSets, } from 'src/cards/join';
 
-const { graph, } = Graph;
 const myDeck = shuffle(deck());
 const myGraph = cGraph(myDeck);
 const first = myDeck[0];

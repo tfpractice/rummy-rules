@@ -1,8 +1,8 @@
 import { Components,Graph, } from 'graph-curry';
+import { byAdj, bySAdj, } from './filter';
+
 const { graph,addEdges, nodes, } = Graph;
 const { componentSet, } = Components;
-
-import { byAdj, bySAdj, } from './filter';
 
 export const cGraph = cards => graph(...cards);
 export const joinAdj = (g, c) => addEdges(g)(c, 0)(...byAdj(nodes(g))(c));
