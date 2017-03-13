@@ -1,5 +1,6 @@
 import { Card, Deck, } from 'bee52';
 import { isAdj, } from '../compare';
+
 const { exclude, bySuit, contains, } = Deck;
 const { suit, } = Card;
 
