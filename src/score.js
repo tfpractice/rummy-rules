@@ -1,5 +1,5 @@
-import { Card, Rank, } from 'bee52';
 import { spread, } from 'fenugreek-collections';
+import { Card, Rank, } from 'bee52';
 
 const { hasRank, rank, } = Card;
 const { rankVal, } = Rank;

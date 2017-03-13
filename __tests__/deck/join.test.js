@@ -3,7 +3,7 @@ import { Deck, } from 'bee52';
 
 const { deck, shuffle, } = Deck;
 
-import { cGraph, joinAdj, joinSuit, seq, sequences, suits, suitSets, } from 'src/deck/join';
+import { cGraph, joinAdj, joinSuit, rankSets, seq, sequences, suits, } from 'src/deck/join';
 
 const myDeck = shuffle(deck());
 const myGraph = cGraph(myDeck);
@@ -40,9 +40,9 @@ describe('join', () => {
       expect(sequences(myDeck)).toBeArray();
     });
   });
-  describe('suitSets', () => {
+  describe('rankSets', () => {
     it('joins all the possible suits in the cards', () => {
-      expect(suitSets(myDeck)).toBeArray();
+      expect(rankSets(myDeck)).toBeArray();
     });
   });
 });
