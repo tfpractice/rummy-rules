@@ -1,5 +1,6 @@
 import { Card, Rank, } from 'bee52';
 import { spread, } from 'fenugreek-collections';
+
 const { hasRank, rank, } = Card;
 const { rankVal, } = Rank;
 

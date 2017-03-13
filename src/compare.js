@@ -1,7 +1,6 @@
 import { Card,Compare, } from 'bee52';
 
 const { adjRanks,hasRank, } = Card;
-
 const { sameRank, diffSuit, sameSuit, } = Compare;
 
 export const rankAdj = c0 => c1 => adjRanks(c0).map(hasRank).some(f => f(c1));
