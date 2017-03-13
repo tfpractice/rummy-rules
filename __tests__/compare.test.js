@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { card, } from 'src/cards/card';
-import { isAdj,rankAdj, suitAdj, } from 'src/cards/compare';
+import { isAdj,rankAdj, suitAdj, } from 'src/compare';
 
 const d2 = card('2','DIAMONDS');
 const d3 = card('3','DIAMONDS');
