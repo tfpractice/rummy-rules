@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { byAdj, hasMatch, } from 'src/cards/filter';
+import { byAdj, bySAdj,hasMatch, } from 'src/deck/filter';
 import { deck, shuffle, } from 'src/deck';
 
 const myDeck = shuffle(deck());
