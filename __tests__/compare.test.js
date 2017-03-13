@@ -1,5 +1,8 @@
 import 'jasmine-expect';
-import { card, } from 'src/cards/card';
+import { Card, } from 'bee52';
+
+const { card, } = Card;
+
 import { isAdj,rankAdj, suitAdj, } from 'src/compare';
 
 const d2 = card('2','DIAMONDS');

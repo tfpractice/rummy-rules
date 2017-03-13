@@ -1,6 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-export const { deck, shuffle, } = Deck;
+
+const { deck, shuffle, } = Deck;
+
 import { cGraph, joinAdj, joinSuit, seq, sequences, suits, suitSets, } from 'src/deck/join';
 
 const myDeck = shuffle(deck());

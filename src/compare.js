@@ -1,5 +1,6 @@
 import { Card,Compare, } from 'bee52';
-const { adjRanks,hasRank, rank, } = Card;
+
+const { adjRanks,hasRank, } = Card;
 
 const { sameRank, diffSuit, sameSuit, } = Compare;
 

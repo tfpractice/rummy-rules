@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand,rankPlays, rankPoss,seqPlays, seqPoss, } from 'src/hand';
-import { sequences, } from 'src/cards/join';
+import { sequences, } from 'src/deck/join';
 const { shuffle, deck, } = Deck;
 const myDeck = (deck());
 const myHand = myDeck.slice(1, 7);

@@ -1,6 +1,6 @@
-import { Rank, } from 'bee52';
+import { Card, Rank, } from 'bee52';
 import { spread, } from 'fenugreek-collections';
-import { hasRank, rank, } from './cards/card';
+const { hasRank, rank, } = Card;
 const { rankVal, } = Rank;
 
 export const sum = (res = 0, x) => res + x;

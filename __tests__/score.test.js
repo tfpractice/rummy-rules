@@ -1,7 +1,10 @@
 import 'jasmine-expect';
 import { allAces, deductions, penalty, points, score, scoreSet, sum,total, } from 'src/score';
-import { deck, } from 'src/deck';
-import { sequences, } from 'src/cards/join';
+import { Deck, } from 'bee52';
+
+import { sequences, } from 'src/deck/join';
+const { deck, } = Deck;
+
 const myDeck = (deck());
 const s26 = sequences(myDeck.slice(0, 27));
 

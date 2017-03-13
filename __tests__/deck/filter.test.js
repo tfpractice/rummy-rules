@@ -1,7 +1,9 @@
 import 'jasmine-expect';
-import { byAdj, bySAdj,hasMatch, } from 'src/deck/filter';
-import { deck, shuffle, } from 'src/deck';
+import { Deck, } from 'bee52';
 
+import { byAdj, bySAdj,hasMatch, } from 'src/deck/filter';
+
+const { deck, shuffle, } = Deck;
 const myDeck = shuffle(deck());
 
 describe('filter', () => {

@@ -1,7 +1,7 @@
 import { Deck, } from 'bee52';
 import { Graph, } from 'graph-curry';
 import { spread, } from 'fenugreek-collections';
-import { hasMatch, sequences,suitSets, } from './cards';
+import { hasMatch, sequences,suitSets, } from './deck';
 const { draw, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
