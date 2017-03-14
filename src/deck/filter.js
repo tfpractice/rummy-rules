@@ -1,10 +1,9 @@
 import { filter, spread, } from 'fenugreek-collections';
-import { Card, Compare, Deck, } from 'bee52';
+import { Card, Deck, diffSuit, } from 'bee52';
 import { isAdj,rankAdj, } from '../compare';
 
 const { exclude, bySuit, byRank,contains, } = Deck;
 const { suit, rank, } = Card;
-const { diffSuit, } = Compare;
 
 export const byAdj = c => arr => bySuit(suit(c))(arr).filter(rankAdj(c));
 export const bySet = c => arr => byRank(rank(c))(arr).filter(diffSuit(c));

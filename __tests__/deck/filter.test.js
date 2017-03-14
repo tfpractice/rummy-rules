@@ -16,7 +16,7 @@ describe('filter', () => {
   describe('bySet', () => {
     it('filters an array by those which share rank but have different suit', () => {
       expect(bySet(myDeck[0])(myDeck)).toBeArray();
-      expect(bySet(myDeck[0])(myDeck).length).toBe(2);
+      expect(bySet(myDeck[0])(myDeck).length).toBe(3);
     });
   });
   describe('hasMatch', () => {
