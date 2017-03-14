@@ -1,10 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
+import { cGraph, joinAdj, joinSet, rankSets, seqGraph, sequences, setGraph, } 
+from 'src/deck/join';
 
 const { deck, shuffle, } = Deck;
-
-import { cGraph, joinAdj, joinSuit, rankSets, seq, sequences, suits, } from 'src/deck/join';
-
 const myDeck = shuffle(deck());
 const myGraph = cGraph(myDeck);
 const first = myDeck[0];
@@ -20,19 +19,19 @@ describe('join', () => {
       expect(Object.keys(joinAdj(myGraph, first))).toBeArray();
     });
   });
-  describe('joinSuit', () => {
-    it('adds edges to a graph between cards of mathing suits', () => {
-      expect(joinSuit(myGraph, first) instanceof Map).toBeTruthy();
+  describe('joinSet', () => {
+    it('adds edges to a graph between cards of mathing setGraph', () => {
+      expect(joinSet(myGraph, first) instanceof Map).toBeTruthy();
     });
   });
-  describe('seq', () => {
+  describe('seqGraph', () => {
     it('joins all the possible sequences in the cards', () => {
-      expect(seq(cGraph(deck())) instanceof Map).toBeTruthy();
+      expect(seqGraph(cGraph(deck())) instanceof Map).toBeTruthy();
     });
   });
-  describe('suits', () => {
+  describe('setGraph', () => {
     it('joins all the suit connnections ', () => {
-      expect(suits(myDeck)).toBeArray();
+      expect(setGraph(myDeck)).toBeArray();
     });
   });
   describe('sequences', () => {
@@ -41,7 +40,7 @@ describe('join', () => {
     });
   });
   describe('rankSets', () => {
-    it('joins all the possible suits in the cards', () => {
+    it('joins all the possible setGraph in the cards', () => {
       expect(rankSets(myDeck)).toBeArray();
     });
   });
