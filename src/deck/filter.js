@@ -1,11 +1,9 @@
-import { filter, spread, } from 'fenugreek-collections';
-import { Card, Deck, diffSuit, } from 'bee52';
+import { Deck, } from 'bee52';
+import { filter, } from 'fenugreek-collections';
 import { rankAdj, suitAdj, } from '../compare';
 
-const { exclude, bySuit, byRank,contains, } = Deck;
-const { suit, rank, } = Card;
+const { contains, } = Deck;
 
 export const byAdj = c => arr => filter(arr)(rankAdj(c));
 export const bySet = c => arr => filter(arr)(suitAdj(c));
-
-export const hasMatch = card => arr => contains(spread(arr))(card);
+export const hasMatch = card => arr => contains(arr)(card);
