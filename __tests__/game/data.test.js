@@ -1,8 +1,5 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-
-// import { hand, id, name, player,plays, setHand, setID, setName,setPlays, } 
-// from 'src/player/data';
 import { deck,discard, game, players,setDeck,setDiscard,setPlayers, } 
 from 'src/game/data';
 
