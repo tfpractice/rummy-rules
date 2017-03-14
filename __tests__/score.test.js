@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { allAces, deductions, penalty, points, score, scoreSet, sum,total, } from 'src/score';
+import { allAces, deduct, penalty, points, score, scoreSet, sum,total, } from 'src/score';
 import { Deck, } from 'bee52';
 
 import { sequences, } from 'src/deck/join';
@@ -66,9 +66,9 @@ describe('score', () => {
       expect(penalty('10')).toEqual(-10);
       expect(penalty('a')).toEqual(-15);
     });
-    describe('deductions', () => {
+    describe('deduct', () => {
       it('accumulates all of the penalties', () => {
-        expect(deductions(myDeck.slice(26))).toEqual(-165);
+        expect(deduct(myDeck.slice(26))).toEqual(-165);
       });
     });
   });
