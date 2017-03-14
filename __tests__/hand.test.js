@@ -1,8 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand,seqPlays, seqPoss,setPlays, setPoss, } from 'src/hand';
-import { sequences, } from 'src/deck/join';
-const { shuffle, deck, } = Deck;
+
+const { deck, } = Deck;
 const myDeck = (deck());
 const myHand = myDeck.slice(1, 7);
 const first = myDeck[0];
@@ -15,11 +15,11 @@ describe('hand', () => {
   });
   describe('seqPoss', () => {
     it('returns the sets containing the poitential card', () => {
-      expect(seqPoss(myDeck[0])(myDeck)).toBeArray();
+      expect(seqPoss(first)(myDeck)).toBeArray();
     });
   }); describe('setPoss', () => {
     it('returns the sets containing the poitential card', () => {
-      expect(setPoss(myDeck[0])(myDeck)).toBeArray();
+      expect(setPoss(first)(myDeck)).toBeArray();
     });
   });
   
