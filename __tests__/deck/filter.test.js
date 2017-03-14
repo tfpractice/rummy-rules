@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 
-import { byAdj,bySAdj,bySet, hasMatch, } from 'src/deck/filter';
+import { byAdj, bySet, hasMatch, } from 'src/deck/filter';
 
 const { deck, shuffle, } = Deck;
 const myDeck = shuffle(deck());
