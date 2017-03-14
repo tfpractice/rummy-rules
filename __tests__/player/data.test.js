@@ -1,15 +1,12 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { discard, draw, drawTo, hand, id,name,play,player,plays, 
-  setHand,
-  setID,
-  setName,
-  setPlays, }
- from 'src/player/player';
+import { hand, id, name, player,plays, setHand, setID, setName,setPlays, } 
+from 'src/player/data';
  
 const { shuffle, deck, } = Deck;
 const dick = player('dick',[],[],'dick');
-const myDeck = deck();
+
+// const myDeck = deck();
 
 describe('Player', () => {
   describe('player', () => {
@@ -38,16 +35,6 @@ describe('Player', () => {
   describe('setID,', () => {
     it('sets the attribute', () => {
       expect(plays(setPlays([ 3,4,5, ])(dick))).toEqual([ 3,4,5, ]);
-    });
-  });
-  describe('draw', () => {
-    it('adds cards to the players hand', () => {
-      expect(hand(draw(7)(myDeck)(dick)).length).toEqual(7);
-    });
-  });
-  describe('drawTo', () => {
-    it('draws all cards to the specified one and adds them ot player hand', () => {
-      expect(hand(drawTo(myDeck[10])(myDeck)(dick)).length).toEqual(11);
     });
   });
 });
