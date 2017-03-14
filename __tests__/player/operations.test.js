@@ -13,7 +13,7 @@ describe('Player', () => {
     });
   });
   describe('drawTo', () => {
-    it('draws all cards to the specified one and adds them to player hand', () => {
+    it('appends multiple cards to a players hand', () => {
       expect(hand(drawTo(myDeck[10])(myDeck)(dick)).length).toEqual(14);
     });
   });
