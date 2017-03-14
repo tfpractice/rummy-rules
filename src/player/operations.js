@@ -1,4 +1,5 @@
 import { Deck, } from 'bee52';
+import { deduct,total, } from '../score';
 import { hand,plays,setHand,setPlays, } from './data';
 
 const { addCards, removeCards, } = Deck;
@@ -13,3 +14,5 @@ export const discard = (...cards) => p =>
   setHand(removeCards(...cards)(hand(p)))(p);
 
 export const play = (...cards) => p => setPlays([ ...plays(p),cards, ])(p);
+
+export const score = p => total(plays(p));
