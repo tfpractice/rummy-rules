@@ -12,5 +12,4 @@ export const drawTo = c => deck => p =>
 export const discard = (...cards) => p => 
   setHand(removeCards(...cards)(hand(p)))(p);
 
-export const play = (...cards) => p => 
-  setPlays(plays(p).concat(cards))(p);
+export const play = (...cards) => p => setPlays([ ...plays(p),cards, ])(p);
