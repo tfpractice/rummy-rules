@@ -3,8 +3,6 @@ import { hand, id, name, player, plays,setHand,setID,setName,setPlays, }
  from 'src/player/player';
 const dick = player('dick',[],[],'dick');
 
-console.log(dick);
-console.log(player());
 describe('Player', () => {
   describe('player', () => {
     it('is an object with a name, id, plays, and hand array', () => {
