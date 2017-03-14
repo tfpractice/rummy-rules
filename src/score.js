@@ -1,5 +1,5 @@
-import { every, map,spread, } from 'fenugreek-collections';
 import { Card, Rank, } from 'bee52';
+import { every, map,spread, } from 'fenugreek-collections';
 
 const { hasRank, rank, } = Card;
 const { rankVal, } = Rank;
