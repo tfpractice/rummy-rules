@@ -16,3 +16,4 @@ export const discard = (...cards) => p =>
 export const play = (...cards) => p => setPlays([ ...plays(p),cards, ])(p);
 
 export const score = p => total(plays(p));
+export const final = p => total(plays(p)) + deduct(hand(p));

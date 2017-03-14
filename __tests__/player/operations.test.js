@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, player, plays, } from 'src/player/data';
-import { discard, draw, drawTo, play, score, } from 'src/player/operations';
+import { discard, draw, drawTo, final, play, score, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
 const dick = draw(7)(myDeck.slice(7))(player('dick', [], [], 'dick'));
@@ -31,6 +31,11 @@ describe('Player', () => {
     it('calculates the points of theplayers plays', () => {
       expect(score(dick)).toEqual(0);
       expect(score(play(...myDeck.filter(x => x.rank === '2'))(dick))).toBe(20);
+    });
+  });
+  describe('final', () => {
+    it('return the score minus the leftover deductions', () => {
+      expect(final(play(...myDeck.filter(x => x.rank === '2'))(dick))).toBe(20);
     });
   });
 });
