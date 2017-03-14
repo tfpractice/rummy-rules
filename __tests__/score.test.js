@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { allAces, deduct, penalty, points, score, scoreSet, sum,total, } from 'src/score';
+import { aceSet, deduct, penalty, points, score, scoreSet, sum,total, } from 'src/score';
 import { Deck, } from 'bee52';
 
 import { sequences, } from 'src/deck/join';
@@ -43,9 +43,9 @@ describe('score', () => {
       expect(score(myDeck)).toEqual(360);
     });
   });
-  describe('allAces', () => {
+  describe('aceSet', () => {
     it('checks if every cards is an ace', () => {
-      expect(allAces(myDeck.filter(c => c.rank === 'a'))).toBeTruthy();
+      expect(aceSet(myDeck.filter(c => c.rank === 'a'))).toBeTruthy();
     });
   });
   describe('scoreSet', () => {
