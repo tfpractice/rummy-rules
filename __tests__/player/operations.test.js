@@ -35,7 +35,7 @@ describe('Player', () => {
   });
   describe('final', () => {
     it('return the score minus the leftover deductions', () => {
-      expect(final(play(...myDeck.filter(x => x.rank === '2'))(dick))).toBe(20);
+      expect(final(play(...myDeck.filter(x => x.rank === '2'))(dick))).toBe(-5);
     });
   });
 });
