@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { deck,discard, game, players,setDeck,setDiscard,setPlayers, } 
+import { active,deck, discard,game, players,setDeck,setDiscard,setPlayers, } 
 from 'src/game/data';
 
 const myGame = game([], Deck.shuffle(Deck.deck()),[]);
@@ -11,6 +11,12 @@ describe('Game', () => {
       expect(players(myGame)).toBeArray();
       expect(deck(myGame)).toBeArray();
       expect(discard(myGame)).toBeArray();
+    });
+  });
+  describe('active', () => {
+    it('returns the first player in the players array', () => {
+      expect(active(myGame)).toBe(undefined);
+      expect(active(setPlayers([ 'active', 'rest', ])(myGame))).toBe('active');
     });
   });
   describe('setPlayers', () => {

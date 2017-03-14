@@ -7,6 +7,7 @@ export const game = (players = [], deck = [], discard = []) =>
  ({ players, deck, discard, });
  
 export const players = ({ players, } = init) => players;
+export const active = ({ players: [ active, ], }) => active;
 export const deck = ({ deck, } = init) => deck;
 export const discard = ({ discard, } = init) => discard;
 
