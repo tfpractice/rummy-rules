@@ -1,12 +1,10 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hand, id, name, player,plays, setHand, setID, setName,setPlays, } 
+import { copy, hand, id,name, player,plays, setHand, setID, setName,setPlays, } 
 from 'src/player/data';
  
 const { shuffle, deck, } = Deck;
 const dick = player('dick',[],[],'dick');
-
-// const myDeck = deck();
 
 describe('Player', () => {
   describe('player', () => {
@@ -15,6 +13,11 @@ describe('Player', () => {
       expect(id(dick)).toBeString();
       expect(hand(dick)).toBeArray();
       expect(plays(dick)).toBeArray();
+    });
+  });
+  describe('copy', () => {
+    it('returns a copy of the player', () => {
+      expect(copy(dick)).toEqual(dick);
     });
   });
   describe('setName,', () => {

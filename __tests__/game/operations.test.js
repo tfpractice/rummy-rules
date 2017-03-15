@@ -1,10 +1,10 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { active, deck, discard, game, players, setDeck, setDiscard, setPlayers, } 
+import { active, deck, discard, game, next,players,setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
-import { deal, dealBin, rotate,turn, } from 'src/game/operations';
+import { actDraw, deal, dealBin,drop,dropNext,rotate, shiftDk,turn, } from 'src/game/operations';
 
 const dick = player('dick', [],[],'dick');
 const jane = player('jane', [],[],'jane');
@@ -23,14 +23,36 @@ describe('operations', () => {
     });
   });
   describe('dealBin', () => {
-    it('draws 7 cards from the game', () => {
-      expect(deck(dealBin(myGame, 1)).length).toEqual(51);
+    describe('when given a deal amount', () => {
+      it('adds one card to the active players hand', () => {
+        expect(deck(dealBin(myGame, 1)).length).toEqual(51);
+      });
+    });
+    describe('when given 0/null', () => {
+      it('discards the next card', () => {
+        expect(discard(dealBin(myGame, 0)).length).toEqual(1);
+        expect(deck(dealBin(myGame, 0)).length).toEqual(50);
+      });
     });
   });
   describe('deal', () => {
     it('deals 7 cards to each player', () => {
-      console.log(players(deal(7)(myGame)));
-      expect(deck(deal(7)(myGame)).length).toEqual(39);
+      expect(deck(deal(7)(myGame)).length).toEqual(37);
+    });
+  });
+  describe('shiftDk', () => {
+    it('returns a game with a deck containg one fewer card', () => {
+      expect(deck(shiftDk(myGame)).length).toEqual(51);
+    });
+  });
+  describe('drop', () => {
+    it('returns a game with a card appeneded to the discard pile', () => {
+      expect(discard(drop(next(myGame))(myGame)).length).toEqual(1);
+    });
+  });
+  describe('dropNext', () => {
+    it('shifts the deck and discards the first card in the deck', () => {
+      expect(deck(dropNext(myGame)).length).toEqual(51);  
     });
   });
 });

@@ -8,7 +8,12 @@ export const id = ({ id, } = init) => id;
 export const hand = ({ hand, } = init) => hand;
 export const plays = ({ plays, } = init) => plays;
 
+export const copy = p => player(name(p), hand(p), plays(p), id(p));
+export const update = next => p => next.id === p.id ? copy(next) : p;
+
 export const setName = n => p => player(n, hand(p), plays(p), id(p));
 export const setHand = h => p => player(name(p), h, plays(p), id(p));
 export const setPlays = ps => p => player(name(p), hand(p), ps, id(p));
 export const setID = i => p => player(name(p), hand(p), plays(p), i);
+
+// export const isSequence= (cards)=>
