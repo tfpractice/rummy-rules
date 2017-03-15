@@ -1,8 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 
-// import { deck,discard, game, players,setDeck,setDiscard,setPlayers, } 
-// from 'src/game/data';
+import { deck,discard, game, players,setDeck,setDiscard,setPlayers, } 
+from 'src/game/data';
 
 import { rotate, } from 'src/game/operations';
 
