@@ -10,6 +10,8 @@ export const draw = amt => deck => p =>
 export const drawTo = c => deck => p => 
   setHand(addCards(...Deck.drawTo(c)(deck))(hand(p)))(p);
 
+export const add = (...cards) => p => setHand(addCards(...cards)(hand(p)))(p); 
+
 export const discard = (...cards) => p => 
   setHand(removeCards(...cards)(hand(p)))(p);
 

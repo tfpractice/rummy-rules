@@ -1,12 +1,15 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-
-import { deck, discard, game, players, setDeck, setDiscard, setPlayers, } 
+import { player, } from 'src/player';
+import { active, deck, discard, game, players, setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
-import { rotate, turn, } from 'src/game/operations';
+import { deal, dealBin, rotate,turn, } from 'src/game/operations';
 
-const myGame = game([ 1,2, ], Deck.shuffle(Deck.deck()), []);
+const dick = player('dick', [],[],'dick');
+const jane = player('jane', [],[],'jane');
+
+const myGame = game([ dick, jane, ], Deck.shuffle(Deck.deck()), []);
 
 describe('operations', () => {
   describe('rotate', () => {
@@ -16,7 +19,18 @@ describe('operations', () => {
   });
   describe('turn', () => {
     it('rotates the ggames players', () => {
-      expect(players(turn(myGame))).toEqual([ 2, 1, ]);
+      expect(players(turn(myGame))).toEqual([ jane,dick, ]);
+    });
+  });
+  describe('dealBin', () => {
+    it('draws 7 cards from the game', () => {
+      expect(deck(dealBin(myGame, 1)).length).toEqual(51);
+    });
+  });
+  describe('deal', () => {
+    it('deals 7 cards to each player', () => {
+      console.log(players(deal(7)(myGame)));
+      expect(deck(deal(7)(myGame)).length).toEqual(39);
     });
   });
 });
