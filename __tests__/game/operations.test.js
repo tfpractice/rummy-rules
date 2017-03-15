@@ -16,7 +16,7 @@ describe('operations', () => {
   });
   describe('turn', () => {
     it('rotates the ggames players', () => {
-      expect(players(turn(myGame))).toEqual([ 2,1, ]);
+      expect(players(turn(myGame))).toEqual([ 2, 1, ]);
     });
   });
 });
