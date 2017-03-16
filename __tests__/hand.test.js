@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hand,seqPlays, seqPoss,setPlays, setPoss, } from 'src/hand';
+import { allSuit,hand,isSeq,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
 
 const { deck, } = Deck;
 const myDeck = (deck());
@@ -27,9 +27,35 @@ describe('hand', () => {
     it('returns the sets containing the poitential card', () => {
       expect(seqPlays(myDeck)).toBeArray();
     });
-  }); describe('setPlays', () => {
+  }); 
+  describe('setPlays', () => {
     it('returns the sets containing the poitential card', () => {
       expect(setPlays(myDeck)).toBeArray();
+    });
+  });
+  describe('allSuit', () => {
+    it('checks if every card shares the same suit as the first', () => {
+      expect(allSuit(myDeck.slice(0,7))).toBeTruthy();
+      expect(allSuit([ myDeck[0], myDeck[15], ])).toBeFalse();
+    });
+  });
+  describe('single', () => {
+    it('checks if the collection has a sole element', () => {
+      expect(single([ 1, ])).toBeTrue();
+      expect(single([ 1,2, ])).toBeFalse();
+    });
+  }); 
+  describe('sameSize', () => {
+    it('checks if the two collections have the same size', () => {
+      expect(sameSize([ 1, ])([ 2, ])).toBeTrue();
+      expect(sameSize([ 1,2, ])([ 1, ])).toBeFalse();
+    });
+  });
+  describe('isSeq', () => {
+    it('compares the size of the sequencethe array ', () => {
+      expect(isSeq(seqPlays(myDeck)[0])).toBeTruthy();
+      expect(isSeq([ ...seqPlays(myDeck)[0], ].splice(0,2))).toBeFalse();
+      expect(isSeq([ myDeck[0], myDeck[15], ])).toBeFalse();
     });
   });
 });
