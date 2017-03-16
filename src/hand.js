@@ -6,8 +6,8 @@ const { draw,addCards,rankSort,bySuit, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
 
-export const seqPlays = hand => sequences(hand).filter(seq => seq.size > 3);
-export const setPlays = hand => rankSets(hand).filter(seq => seq.size > 3);
+export const seqPlays = hand => sequences(hand).filter(seq => seq.size > 2);
+export const setPlays = hand => rankSets(hand).filter(seq => seq.size > 2);
 
 export const seqPoss = c => hand => sequences(addCards(c)(hand)).filter(has(c));
 export const setPoss = c => hand => rankSets(addCards(c)(hand)).filter(has(c));

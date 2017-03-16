@@ -25,7 +25,7 @@ describe('Player', () => {
   });
   describe('play', () => {
     it('apppends a set of crds to th eplayers pplays array', () => {
-      expect(plays(play(...hand(dick).splice(3))(dick)).length).toEqual(1);
+      expect(plays(play(...hand(dick).slice(0,3))(dick)).length).toEqual(1);
     });
   });
   describe('score', () => {
@@ -36,7 +36,7 @@ describe('Player', () => {
   });
   describe('final', () => {
     it('return the score minus the leftover deductions', () => {
-      expect(final(play(...myDeck.filter(x => x.rank === '2'))(dick))).toBe(-5);
+      expect(final(play(...myDeck.filter(x => x.rank === '2'))(dick))).toBe(-40);
     });
   });
 });
