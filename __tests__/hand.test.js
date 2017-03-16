@@ -67,7 +67,7 @@ describe('hand', () => {
   });
   describe('playable', () => {
     it('checks if a set of cards if a sequence or set', () => {
-      expect(playble([ ...setPlays(myDeck)[0], ])).toBeTrue();
+      expect(playable([ ...setPlays(myDeck)[0], ])).toBeTrue();
     });
   });
 });
