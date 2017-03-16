@@ -84,6 +84,7 @@ describe('hand', () => {
   });
   describe('possibles', () => {
     it('returns the sets that can contain each card in a hand', () => {
+      console.log('playable(myDeck[0])', playable(myDeck[0]));
       expect(possibles(myHand)(setPlays(diff(myDeck)(myHand)))).toBeArray();
     });
   });
