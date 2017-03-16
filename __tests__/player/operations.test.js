@@ -1,8 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, player, plays, } from 'src/player/data';
-import { draw, drawTo, final, play,score, scrap, } 
-from 'src/player/operations';
+import { draw, drawTo, final, play,score, scrap, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
 const dick = draw(7)(myDeck.slice(7))(player('dick', [], [], 'dick'));
