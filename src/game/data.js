@@ -1,4 +1,6 @@
 import { Deck, } from 'bee52';
+import { flattenBin as flat, } from 'fenugreek-collections';
+import { plays, } from '../player';
 const { deck: bDeck, shuffle, } = Deck;
 const init = { players: [], deck: shuffle(bDeck()), discard: [], }; 
 
@@ -21,3 +23,6 @@ export const active = ({ players: [ act, ], }) => act;
 export const passive = ({ players: [ act, ...pass ], }) => pass;
 
 export const setActive = a => g => (setPlayers([ a, ...passive(g), ]))(g);
+export const allPlays = g => players(g).map(plays);
+
+// .reduce(flat, []);

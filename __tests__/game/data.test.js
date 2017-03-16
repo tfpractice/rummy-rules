@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { active, deck, discard, game,next, passive, players, rest, setDeck, setDiscard, setPlayers, } 
+import { active, allPlays,deck, discard, game,next, passive, players, rest, setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
 const myGame = game([], Deck.shuffle(Deck.deck()), []);
@@ -47,6 +47,11 @@ describe('Game', () => {
   describe('setDiscard', () => {
     it('setst he discard attribute', () => {
       expect(discard(setDiscard(Deck.deck().slice(3))(myGame)).length).toBe(49);
+    });
+  });
+  describe('allPlays', () => {
+    it('returns all of the plays in the game', () => {
+      expect(allPlays(myGame)).toBeArray();
     });
   });
 });
