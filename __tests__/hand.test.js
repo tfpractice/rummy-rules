@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { allSuit,hand,isSeq,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
+import { allSuit,hand,isSeq,isSet,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
 
 const { deck, } = Deck;
 const myDeck = (deck());
@@ -56,6 +56,13 @@ describe('hand', () => {
       expect(isSeq(seqPlays(myDeck)[0])).toBeTruthy();
       expect(isSeq([ ...seqPlays(myDeck)[0], ].splice(0,2))).toBeFalse();
       expect(isSeq([ myDeck[0], myDeck[15], ])).toBeFalse();
+    });
+  });
+  describe('isSet', () => {
+    it('compares the size of the sequencethe array ', () => {
+      expect(isSet(setPlays(myDeck)[0])).toBeTruthy();
+      expect(isSet([ ...setPlays(myDeck)[0], ].splice(0,2))).toBeFalse();
+      expect(isSet([ myDeck[0], myDeck[15], ])).toBeFalse();
     });
   });
 });
