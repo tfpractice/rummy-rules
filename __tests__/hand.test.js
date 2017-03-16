@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { allSuit,hand,isSeq,isSet,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
+import { allSuit,hand,isSeq,isSet,playable,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
 
 const { deck, } = Deck;
 const myDeck = (deck());
@@ -63,6 +63,11 @@ describe('hand', () => {
       expect(isSet(setPlays(myDeck)[0])).toBeTruthy();
       expect(isSet([ ...setPlays(myDeck)[0], ].splice(0,2))).toBeFalse();
       expect(isSet([ myDeck[0], myDeck[15], ])).toBeFalse();
+    });
+  });
+  describe('playable', () => {
+    it('checks if a set of cards if a sequence or set', () => {
+      expect(playble([ ...setPlays(myDeck)[0], ])).toBeTrue();
     });
   });
 });

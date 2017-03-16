@@ -17,10 +17,13 @@ const adjBin = (a,b) => rankAdj(a)(b) && b;
 export const allSuit = cards => every(cards)(sameSuit(first(cards)));
 export const allRank = cards => every(cards)(sameRank(first(cards)));
 
-// export const allAdj = cards => rankSort(cards).;
 export const sameSize = a => b => spread(a).length === spread(b).length;
 export const single = coll => spread(coll).length === 1;
+
 export const isSeq = cards => 
   single(seqPlays(cards)) && sameSize(cards)(first(seqPlays(cards)));
+  
 export const isSet = cards =>
   single(setPlays(cards)) && sameSize(cards)(first(setPlays(cards)));
+
+export const playable = cards => [ isSeq,isSet, ].some(f => f(cards));
