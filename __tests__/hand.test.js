@@ -1,11 +1,13 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { allSuit,hand,isSeq,isSet,playable,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
+import { allSuit,canPlay,findPlays,hand,isSeq,isSet, playable, playSearch,
+  possibles,sameSize,seqPlays, seqPoss, setPlays,setPoss, single, } from 'src/hand';
 
-const { deck, } = Deck;
+const { deck,diff, } = Deck;
 const myDeck = (deck());
 const myHand = myDeck.slice(1, 7);
 const first = myDeck[0];
+const sixes = (myDeck.filter(c => c.rank === '6'));
 
 describe('hand', () => {
   describe('hand', () => {
@@ -68,6 +70,21 @@ describe('hand', () => {
   describe('playable', () => {
     it('checks if a set of cards if a sequence or set', () => {
       expect(playable([ ...setPlays(myDeck)[0], ])).toBeTrue();
+    });
+  });
+  describe('canPlay', () => {
+    it('checks if a set of cards is playable with another card', () => {
+      expect(canPlay(sixes[0])(sixes.slice(1))).toBeTrue();
+    });
+  });
+  describe('playSearch', () => {
+    it('searches an array sets for one which can contain a card ', () => {
+      expect(playSearch(setPlays(diff(myDeck)(myHand)))(myHand[0])).toBeArray();
+    });
+  });
+  describe('possibles', () => {
+    it('returns the sets that can contain each card in a hand', () => {
+      expect(possibles(myHand)(setPlays(diff(myDeck)(myHand)))).toBeArray();
     });
   });
 });
