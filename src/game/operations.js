@@ -1,7 +1,8 @@
 import { spreadK, } from 'fenugreek-collections';
 import { Deck, } from 'bee52';
 import { add as addHand, hand, setHand, } from '../player';
-import { active, deck, discard, next, passive, players, rest, setActive, setDeck, setDiscard, setPlayers, } from './data';
+import { active, deck, discard, next, passive, players, rest, setActive, 
+  setDeck, setDiscard, setPlayers, } from './data';
 
 const { removeCards, addCards, } = Deck;
 
