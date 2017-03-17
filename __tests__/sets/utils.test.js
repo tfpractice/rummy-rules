@@ -1,5 +1,6 @@
 import 'jasmine-expect';
-import { exceeds, len,single, xExceeds, } from 'src/sets/utils';
+import { exceeds, len,sameSize, single,xExceeds, } from 'src/sets/utils';
+
 describe('utils', () => {
   describe('len', () => {
     it('returns the length of a collection', () => {
@@ -18,6 +19,13 @@ describe('utils', () => {
   }); describe('single', () => {
     it('checks if the array lenght is 1', () => {
       expect(single([ 1, ])).toBeTruthy();
+    });
+  });
+  
+  describe('sameSize', () => {
+    it('checks if the two collections have the same size', () => {
+      expect(sameSize([ 1, ])([ 2, ])).toBeTrue();
+      expect(sameSize([ 1,2, ])([ 1, ])).toBeFalse();
     });
   });
 });

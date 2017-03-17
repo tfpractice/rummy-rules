@@ -47,12 +47,7 @@ describe('hand', () => {
       expect(single([ 1,2, ])).toBeFalse();
     });
   }); 
-  describe('sameSize', () => {
-    it('checks if the two collections have the same size', () => {
-      expect(sameSize([ 1, ])([ 2, ])).toBeTrue();
-      expect(sameSize([ 1,2, ])([ 1, ])).toBeFalse();
-    });
-  });
+
   describe('isSeq', () => {
     it('compares the size of the sequencethe array ', () => {
       expect(isSeq(seqPlays(myDeck)[0])).toBeTruthy();
