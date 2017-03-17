@@ -28,10 +28,11 @@ export const dealBin = (g, n) => n ? turn(actDraw(g)) : dropNext(turn(actDraw(g)
 
 export const deal = amt => g => dealRange(amt)(g).reduce(dealBin, g);
 export const actPlay = (...cards) => g => playC(...cards)(active(g));
-export const playByType = set => isFull(...set) ? playC(set) : playC(...set);
+export const playByType = set => g =>
+isFull(...set) ? playC(set)(active(g)) : playC(...set)(active(g));
   
 export const playable = (...cards) => g =>
  [ isFull ,allFit(allSets(g)), ].some(f => f(...cards));
 
 export const play = (...cards) => g =>
-  playable(...cards)(g) ? turn(playByType(cards)(active(g)))(g) : g;
+  playable(...cards)(g) ? turn(setActive(playByType(cards)(g))(g)) : g;
