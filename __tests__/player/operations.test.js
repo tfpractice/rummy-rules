@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hand, player, plays, } from 'src/player/data';
+import { hand, player, sets, } from 'src/player/data';
 import { draw, drawTo, final, play,score, scrap, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
@@ -23,12 +23,12 @@ describe('Player', () => {
     });
   });
   describe('play', () => {
-    it('apppends a set of crds to th eplayers pplays array', () => {
-      expect(plays(play(hand(dick).slice(0,3))(dick)).length).toEqual(1);
+    it('apppends a set of crds to th eplayers psets array', () => {
+      expect(sets(play(hand(dick).slice(0,3))(dick)).length).toEqual(1);
     });
   });
   describe('score', () => {
-    it('calculates the points of theplayers plays', () => {
+    it('calculates the points of theplayers sets', () => {
       expect(score(dick)).toEqual(0);
       expect(score(play(myDeck.filter(x => x.rank === '2'))(dick))).toBe(20);
     });
