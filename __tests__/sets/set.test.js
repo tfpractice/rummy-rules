@@ -36,7 +36,7 @@ describe('fullSets', () => {
   });
   describe('isFull', () => {
     it('checks if an array of cards is a standalone set or seq', () => {
-      expect(isFull(fullSets(myDeck)[0])).toBeTruthy();
+      expect(isFull(...fullSets(myDeck)[0])).toBeTruthy();
     });
   });
   describe('canFit', () => {

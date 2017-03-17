@@ -13,7 +13,7 @@ export const draw = amt => deck => p => addHand(...Deck.draw(amt)(deck))(p);
 
 export const drawTo = c => deck => p => addHand(...Deck.drawTo(c)(deck))(p);
 
-export const play = cards => p => setSets(append(sets(p))(cards))(scrap(...cards)(p));
+export const play = set => p => setSets(append(sets(p))(set))(scrap(...set)(p));
 
 export const score = p => total(sets(p));
 export const final = p => total(sets(p)) + deduct(hand(p));

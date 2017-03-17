@@ -1,8 +1,9 @@
 import { flattenBin as flat, spreadK, } from 'fenugreek-collections';
 import { Deck, } from 'bee52';
+import { allFit, isFull, } from '../sets';
 import { addHand, hand, plays, setHand, } from '../player';
-import { active, deck, discard, next, passive, players, rest, setActive, 
-  setDeck, setDiscard, setPlayers, } from './data';
+import { active, allSets, deck, discard, next, passive, players, rest, 
+  setActive, setDeck, setDiscard,setPlayers, } from './data';
 
 const { add, } = Deck;
 
@@ -26,3 +27,6 @@ export const actDraw = g => setActive(addHand(next(g))(active(g)))(shiftDk(g));
 export const dealBin = (g, n) => n ? turn(actDraw(g)) : dropNext(turn(actDraw(g)));
 
 export const deal = amt => g => dealRange(amt)(g).reduce(dealBin, g);
+
+// export const willFit = (...cards) => g => allFit(allSets(g))(...cards);
+// export const playable = (...cards) => g => isFull(cards) || allFit(allSets(g))(...cards);

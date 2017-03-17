@@ -15,9 +15,9 @@ export const fullSets = deck => rankSets(deck).filter(exceeds(2));
 
 export const isSeq = cards => every(cards)(contains(first(fullSeqs(cards))));
 export const isSet = cards => every(cards)(contains(first(fullSets(cards))));
-export const isFull = cards => [ isSeq,isSet, ].some(f => f(cards));
+export const isFull = (...cards) => [ isSeq,isSet, ].some(f => f(cards));
 
-export const canFit = card => set => isFull(append(set)(card));
+export const canFit = card => set => isFull(...append(set)(card));
 export const hasFit = sets => card => some(sets)(canFit(card));
 export const allFit = sets => (...cards) => every(cards)(hasFit(sets));
 export const everyFit = (...cards) => sets => every(cards)(hasFit(sets));
