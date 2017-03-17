@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { fullSeqs, fullSets, isFull, isSeq, isSet, } from 'src/sets/set';
+import { allFit, canFit,findFit, fullSeqs, fullSets, hasFit, isFull, isSeq, isSet, possibles, } from 'src/sets/set';
 import { Deck, } from 'bee52';
 
 const { deck, } = Deck;
@@ -37,6 +37,33 @@ describe('fullSets', () => {
   describe('isFull', () => {
     it('checks if an array of cards is a standalone set or seq', () => {
       expect(isFull(fullSets(myDeck)[0])).toBeTruthy();
+    });
+  });
+  describe('canFit', () => {
+    it('checks if a card will fit into a sequece or a set', () => {
+      const [ fullFirst, ...fullRest ] = [ ...fullSets(myDeck)[0], ];
+
+      expect(canFit(fullFirst)(fullRest)).toBeTruthy();
+    });
+  });
+  describe('hasFit', () => {
+    it('searches an array of sets for a place to fit a crad', () => {
+      expect(hasFit(fullSets(myDeck.slice(1)))(myDeck[0])).toBeTruthy();
+    });
+  });
+  describe('allFit', () => {
+    it('checks if all the porvided cards can fit into an arary of sets', () => {
+      expect(allFit(fullSets(myDeck.slice(2)))(...myDeck.slice(0,2))).toBeTruthy();
+    });
+  });
+  describe('findFit', () => {
+    it('finds a set which can Fit a  card', () => {
+      expect(findFit(fullSets(myDeck.slice(2)))(myDeck[1])).toBeTruthy();
+    });
+  });
+  describe('possibles', () => {
+    it('checks a deck of cards for all possible fits in an array of sets ', () => {
+      expect(possibles(myDeck.slice(0,2))(fullSets(myDeck.slice(2)))).toBeArray();
     });
   });
 });

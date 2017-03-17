@@ -1,5 +1,5 @@
 import { Deck, sameRank,sameSuit, } from 'bee52';
-import { every,first, flattenBin as flat, spread, } from 'fenugreek-collections';
+import { append ,every, first, flattenBin as flat, some, spread, } from 'fenugreek-collections';
 import { hasMatch, rankSets,sequences, } from '../deck';
 import { exceeds, } from './utils';
 
@@ -15,11 +15,11 @@ export const fullSets = deck => rankSets(deck).filter(exceeds(2));
 
 export const isSeq = cards => every(cards)(contains(first(fullSeqs(cards))));
 export const isSet = cards => every(cards)(contains(first(fullSets(cards))));
-
 export const isFull = cards => [ isSeq,isSet, ].some(f => f(cards));
-export const canFit = card => set;
 
-export const playable = cards => [ isSeq,isSet, ].some(f => f(cards));
-export const canPlay = c => set => playable([ ...set, c, ]);
-export const playSearch = sets => c => sets.filter(canPlay(c));
-export const possibles = hand => sets => hand.map(playSearch(sets)).reduce(flat,[]);
+export const canFit = card => set => isFull(append(set)(card));
+export const hasFit = sets => card => some(sets)(canFit(card));
+export const allFit = sets => (...cards) => every(cards)(hasFit(sets));
+export const everyFit = (...cards) => sets => every(cards)(hasFit(sets));
+export const findFit = sets => c => sets.filter(canFit(c));
+export const possibles = deck => sets => deck.map(findFit(sets)).reduce(flat,[]);
