@@ -28,5 +28,5 @@ export const dealBin = (g, n) => n ? turn(actDraw(g)) : dropNext(turn(actDraw(g)
 
 export const deal = amt => g => dealRange(amt)(g).reduce(dealBin, g);
 
-// export const willFit = (...cards) => g => allFit(allSets(g))(...cards);
-// export const playable = (...cards) => g => isFull(cards) || allFit(allSets(g))(...cards);
+export const playable = (...cards) => g => 
+[ isFull ,allFit(allSets(g)), ].some(f => f(...cards));

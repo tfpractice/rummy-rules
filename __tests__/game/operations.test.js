@@ -1,13 +1,13 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { active, deck, discard, game, next,players,setDeck, setDiscard, setPlayers, } 
+import { active, deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
-import { actDraw, deal, dealBin,drop,dropNext,rotate, shiftDk,turn, } from 'src/game/operations';
+import { actDraw, deal, dealBin, drop, dropNext,playable, rotate, shiftDk, turn, } from 'src/game/operations';
 
-const dick = player('dick', [],[],'dick');
-const jane = player('jane', [],[],'jane');
+const dick = player('dick', [], [], 'dick');
+const jane = player('jane', [], [], 'jane');
 
 const myGame = game([ dick, jane, ], Deck.shuffle(Deck.deck()), []);
 
@@ -19,7 +19,7 @@ describe('operations', () => {
   });
   describe('turn', () => {
     it('rotates the ggames players', () => {
-      expect(players(turn(myGame))).toEqual([ jane,dick, ]);
+      expect(players(turn(myGame))).toEqual([ jane, dick, ]);
     });
   });
   describe('dealBin', () => {
@@ -53,6 +53,17 @@ describe('operations', () => {
   describe('dropNext', () => {
     it('shifts the deck and discards the first card in the deck', () => {
       expect(deck(dropNext(myGame)).length).toEqual(51);  
+    });
+  });
+  describe('playable', () => {
+    it('checks if a set of cards is playable', () => {
+      // console.log('playable(...Deck.deck().slice(0,3))(myGame)', playable(...Deck.deck().slice(0, 3))(myGame));
+      // console.log÷('...Deck.deck().slice(0, 3)', ...Deck.deck().slice(0, 3));
+      const f3 = Deck.deck().slice(0, 4);
+
+      expect(playable(...f3)(myGame)).toBeTruthy();
+
+      // expect(playable(...Deck.deck().slice(0,3))(myGame)).toBeTruthy();
     });
   });
 });
