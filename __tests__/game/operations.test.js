@@ -1,13 +1,14 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { active, deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
+import { active, allSets,deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
-import { actDraw, deal, dealBin, drop, dropNext,playable, rotate, shiftDk, turn, } from 'src/game/operations';
+import { actDraw, deal, dealBin,drop, dropNext, play,playable, rotate, shiftDk, turn, } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
+const first3 = Deck.deck().slice(0, 4);
 
 const myGame = game([ dick, jane, ], Deck.shuffle(Deck.deck()), []);
 
@@ -61,9 +62,15 @@ describe('operations', () => {
       // console.log÷('...Deck.deck().slice(0, 3)', ...Deck.deck().slice(0, 3));
       const f3 = Deck.deck().slice(0, 4);
 
-      expect(playable(...f3)(myGame)).toBeTruthy();
+      expect(playable(...first3)(myGame)).toBeTruthy();
 
       // expect(playable(...Deck.deck().slice(0,3))(myGame)).toBeTruthy();
+    });
+  });
+  describe('play', () => {
+    it('returns a new game with players changed', () => {
+      console.log('allSets(play(first3)(myGame))', allSets(play(first3)(myGame)));
+      expect(allSets(play(first3)(myGame))).toBeTruthy();
     });
   });
 });
