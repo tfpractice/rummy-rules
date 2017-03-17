@@ -1,8 +1,8 @@
 import { Deck, } from 'bee52';
 import { append, } from 'fenugreek-collections';
-import { deduct,total, } from '../score';
-import { hand,setHand,sets,setSets, } from './data';
-import { playable, } from '../hand';
+import { deduct, total, } from '../score';
+import { hand, setHand, sets, setSets, } from './data';
+
 const { add, drop, } = Deck;
 
 export const addHand = (...cards) => p => setHand(add(...cards)(hand(p)))(p); 
