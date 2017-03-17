@@ -18,8 +18,8 @@ export const allRank = cards => every(cards)(sameRank(first(cards)));
 export const sameSize = a => b => spread(a).length === spread(b).length;
 export const single = coll => spread(coll).length === 1;
 
-export const isSeq = cards => 
-  single(seqPlays(cards)) && sameSize(cards)(first(seqPlays(cards)));
+export const isSeq = cards => every(cards)(hasMatch(first(fullSeqs(cards))));
+single(seqPlays(cards)) && sameSize(cards)(first(seqPlays(cards)));
   
 export const isSet = cards =>
   single(setPlays(cards)) && sameSize(cards)(first(setPlays(cards)));
