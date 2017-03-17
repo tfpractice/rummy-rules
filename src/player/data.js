@@ -15,5 +15,3 @@ export const setName = n => p => player(n, hand(p), sets(p), id(p));
 export const setHand = h => p => player(name(p), h, sets(p), id(p));
 export const setSets = s => p => player(name(p), hand(p), s, id(p));
 export const setID = i => p => player(name(p), hand(p), sets(p), i);
-
-// export const isSequence= (cards)=>
