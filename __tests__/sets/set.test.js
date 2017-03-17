@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { fullSeqs, fullSets, isSeq, isSet, } from 'src/sets/set';
+import { fullSeqs, fullSets, isFull, isSeq, isSet, } from 'src/sets/set';
 import { Deck, } from 'bee52';
 
 const { deck, } = Deck;
@@ -32,6 +32,11 @@ describe('fullSets', () => {
       expect(isSet(fullSets(myDeck)[0])).toBeTruthy();
       expect(isSet([ ...fullSets(myDeck)[0], ].splice(0,2))).toBeFalse();
       expect(isSet([ myDeck[0], myDeck[15], ])).toBeFalse();
+    });
+  });
+  describe('isFull', () => {
+    it('checks if an array of cards is a standalone set or seq', () => {
+      expect(isFull(fullSets(myDeck)[0])).toBeTruthy();
     });
   });
 });

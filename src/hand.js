@@ -12,11 +12,11 @@ export const setPlays = hand => rankSets(hand).filter(seq => seq.size > 2);
 export const seqPoss = c => hand => sequences(add(c)(hand)).filter(has(c));
 export const setPoss = c => hand => rankSets(add(c)(hand)).filter(has(c));
 
-export const allSuit = cards => every(cards)(sameSuit(first(cards)));
-export const allRank = cards => every(cards)(sameRank(first(cards)));
-
 export const sameSize = a => b => spread(a).length === spread(b).length;
 export const single = coll => spread(coll).length === 1;
+
+export const allSuit = cards => every(cards)(sameSuit(first(cards)));
+export const allRank = cards => every(cards)(sameRank(first(cards)));
 
 export const isSeq = cards => 
   single(seqPlays(cards)) && sameSize(cards)(first(seqPlays(cards)));
