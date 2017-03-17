@@ -69,7 +69,7 @@ describe('operations', () => {
   });
   describe('play', () => {
     it('returns a new game with players changed', () => {
-      console.log('allSets(play(first3)(myGame))', allSets(play(first3)(myGame)));
+      console.log('allSets(play(first3)(myGame))', play(first3)(myGame));
       expect(allSets(play(first3)(myGame))).toBeTruthy();
     });
   });
