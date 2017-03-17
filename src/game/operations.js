@@ -1,10 +1,10 @@
 import { flattenBin as flat, spreadK, } from 'fenugreek-collections';
 import { Deck, } from 'bee52';
-import { add as addHand, hand, plays, setHand, } from '../player';
+import { addHand, hand, plays, setHand, } from '../player';
 import { active, deck, discard, next, passive, players, rest, setActive, 
   setDeck, setDiscard, setPlayers, } from './data';
 
-const { removeCards, addCards, } = Deck;
+const { add, } = Deck;
 
 const range = (len = 0) => [ ...Array(len).keys(), ];
 const revRange = (len = 0) => range(len).reverse();
@@ -17,7 +17,7 @@ export const turn = game => setPlayers(rotate(players(game)))(game);
 
 export const shiftDk = game => setDeck(rest(game))(game);
 
-export const drop = card => g => setDiscard(addCards(card)(discard(g)))(g);
+export const drop = card => g => setDiscard(add(card)(discard(g)))(g);
 
 export const dropNext = g => drop(next(g))(shiftDk(g));
 
