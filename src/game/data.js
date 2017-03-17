@@ -24,5 +24,3 @@ export const passive = ({ players: [ act, ...pass ], }) => pass;
 
 export const setActive = a => g => (setPlayers([ a, ...passive(g), ]))(g);
 export const allPlays = g => players(g).map(plays);
-
-// .reduce(flat, []);

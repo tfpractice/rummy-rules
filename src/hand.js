@@ -2,15 +2,15 @@ import { Deck, sameRank,sameSuit, } from 'bee52';
 import { every,first, flattenBin as flat, spread, } from 'fenugreek-collections';
 import { hasMatch as has,rankSets,sequences, } from './deck';
 
-const { draw,addCards,rankSort,bySuit, } = Deck;
+const { draw,add,rankSort,bySuit, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
 
 export const seqPlays = hand => sequences(hand).filter(seq => seq.size > 2);
 export const setPlays = hand => rankSets(hand).filter(seq => seq.size > 2);
 
-export const seqPoss = c => hand => sequences(addCards(c)(hand)).filter(has(c));
-export const setPoss = c => hand => rankSets(addCards(c)(hand)).filter(has(c));
+export const seqPoss = c => hand => sequences(add(c)(hand)).filter(has(c));
+export const setPoss = c => hand => rankSets(add(c)(hand)).filter(has(c));
 
 export const allSuit = cards => every(cards)(sameSuit(first(cards)));
 export const allRank = cards => every(cards)(sameRank(first(cards)));

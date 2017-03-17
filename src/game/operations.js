@@ -25,4 +25,4 @@ export const actDraw = g => setActive(addHand(next(g))(active(g)))(shiftDk(g));
 
 export const dealBin = (g, n) => n ? turn(actDraw(g)) : dropNext(turn(actDraw(g)));
 
-export const deal = ct => g => dealRange(ct)(g).reduce(dealBin, g);
+export const deal = amt => g => dealRange(amt)(g).reduce(dealBin, g);
