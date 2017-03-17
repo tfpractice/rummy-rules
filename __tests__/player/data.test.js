@@ -1,18 +1,19 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { copy, hand, id,name, player,plays, setHand, setID, setName,setPlays, } 
+import { copy, hand, id,name, player,setHand, setID, setName, sets,setSets, } 
 from 'src/player/data';
  
 const { shuffle, deck, } = Deck;
+
 const dick = player('dick',[],[],'dick');
 
 describe('Player', () => {
   describe('player', () => {
-    it('is an object with a name, id, plays, and hand array', () => {
+    it('is an object with a name, id, sets, and hand array', () => {
       expect(name(dick)).toBeString();
       expect(id(dick)).toBeString();
       expect(hand(dick)).toBeArray();
-      expect(plays(dick)).toBeArray();
+      expect(sets(dick)).toBeArray();
     });
   });
   describe('copy', () => {
@@ -30,14 +31,14 @@ describe('Player', () => {
       expect(id(setID('lol')(dick))).toEqual('lol');
     });
   });
-  describe('setPlays,', () => {
+  describe('setSets,', () => {
     it('sets the attribute', () => {
       expect(hand(setHand([ 1,2,3, ])(dick))).toEqual([ 1,2,3, ]);
     });
   });
   describe('setID,', () => {
     it('sets the attribute', () => {
-      expect(plays(setPlays([ 3,4,5, ])(dick))).toEqual([ 3,4,5, ]);
+      expect(sets(setSets([ 3,4,5, ])(dick))).toEqual([ 3,4,5, ]);
     });
   });
 });
