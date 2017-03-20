@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hand, player, plays,sets, } from 'src/player/data';
+import { hand, player,sets, } from 'src/player/data';
 import { addSet, draw, drawTo, final, play, playBin,score, scrap, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
