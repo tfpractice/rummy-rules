@@ -9,7 +9,6 @@ export const hand = ({ hand, } = init) => hand;
 export const sets = ({ sets, } = init) => sets;
 
 export const copy = p => player(name(p), hand(p), sets(p), id(p));
-export const update = next => p => next.id === p.id ? copy(next) : p;
 
 export const setName = n => p => player(n, hand(p), sets(p), id(p));
 export const setHand = h => p => player(name(p), h, sets(p), id(p));
