@@ -1,8 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { allSets, deck, game, } from 'src/game/data';
-import { claim, claimSet, deckDel, play, playable, playPartial, playWhole, rumCheck, rummable, } from 'src/game/operations';
+import { allSets, deck, discard,game, } from 'src/game/data';
+import { claim, claimSet, deckDel, play, playable, playPartial,playWhole, rumCheck, rumDrop, rummable, rummy, } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -13,7 +13,8 @@ const myGame = game([ dick, jane, ], (Deck.deck()), []);
 const rumGame = game([ dick, jane, ], (Deck.deck().slice(9)), Deck.deck().slice(0, 9));
 const d4 = deck(rumGame).slice(0, 4);
 const rClaim = claim(...d4)(deckDel(...d4)(rumGame)); 
-const rPlay = playWhole(...d4)(rClaim);
+const queens = deck(rumGame).filter(c => c.rank === 'q');
+const rPlay = (playWhole(...d4)(rClaim));
 
 describe('play', () => {
   describe('playWhole', () => {
@@ -25,8 +26,6 @@ describe('play', () => {
     it('plays a partial set of cards', () => {
       const clubGame = playWhole(...first3)(myGame);
       const next2 = deck(myGame).slice(3, 5);
-
-      console.log('(allSets(playPartial(...next2)(clubGame))', (allSets(playPartial(...next2)(clubGame))));
       
       expect(allSets(playPartial(...next2)(clubGame)).length).toEqual(3);
     });
@@ -38,7 +37,6 @@ describe('play', () => {
   });
   describe('claimSet', () => {
     it('adds a set to the specified player', () => {
-      console.log('allSets(claimSet(...first3)(jane)(myGame))', allSets(claimSet(...first3)(jane)(myGame)));
       expect(allSets(claimSet(...first3)(jane)(myGame))).toBeArray();
     });
   });
@@ -55,7 +53,18 @@ describe('play', () => {
   });
   describe('rummable', () => {
     it('finds the cards that can be played', () => {
-      expect(rummable(rPlay).length).toEqual(3);
+      expect(rummable(rPlay).length).toEqual(9);
+    });
+  });
+  describe('rumDrop', () => {
+    it('drops the rummable cards from the discard', () => {
+      expect(rummable(rumDrop(rPlay)).length).toEqual(0);
+    });
+  });
+  describe('rummy', () => {
+    it('adds any rummable cards to the callers sets', () => {
+      expect(rummable(rummy(jane)(rPlay)).length).toEqual(0);
+      expect(discard(rummy(jane)(rPlay))).not.toContain(rummable(rPlay)[0]);
     });
   });
 });

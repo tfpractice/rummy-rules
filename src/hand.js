@@ -1,4 +1,4 @@
-import { Deck, sameRank,sameSuit, } from 'bee52';
+import { Deck, sameRank,sameSuit,unionBin, } from 'bee52';
 import { every,first, flattenBin as flat, spread, } from 'fenugreek-collections';
 import { hasMatch as has,rankSets,sequences, } from './deck';
 

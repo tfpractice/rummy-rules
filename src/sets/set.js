@@ -1,10 +1,10 @@
 import { Deck, } from 'bee52';
-import { append ,every, first, flattenBin as flat, flatten, some, spread, } 
+import { append ,every, filter, first, flattenBin as flat, flatten, some, spread, } 
 from 'fenugreek-collections';
 import { hasMatch, rankSets,sequences, } from '../deck';
 import { exceeds, } from './utils';
 
-const { draw,add, contains, } = Deck;
+const { draw,add, contains,unionBin, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
 
@@ -25,4 +25,7 @@ export const hasFit = sets => (...cards) => some(sets)(canFit(...cards));
 export const allFit = sets => (...cards) => every(cards)(hasFit(sets));
 export const everyFit = (...cards) => sets => every(cards)(hasFit(sets));
 export const findFit = sets => c => sets.filter(canFit(c));
+
+export const playables = deck => sets => 
+  filter(possibles(deck))(hasFit(sets)).reduce(unionBin,[]);
 export const possFits = deck => sets => possibles(deck).map(findFit(sets)).reduce(flat,[]);
