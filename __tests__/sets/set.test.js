@@ -1,5 +1,5 @@
 import 'jasmine-expect';
-import { allFit, canFit,findFit, fullSeqs, fullSets, hasFit, isFull, isSeq, isSet, possibles, } from 'src/sets/set';
+import { allFit, canFit,findFit, fullSeqs, fullSets, hasFit, isFull, isSeq, isSet, possFits, possibles, } from 'src/sets/set';
 import { Deck, } from 'bee52';
 
 const { deck, } = Deck;
@@ -44,8 +44,6 @@ describe('fullSets', () => {
       const [ fullFirst, ...fullRest ] = [ ...fullSets(myDeck)[0], ];
       const [ full0,full1, ...fullSlice ] = [ ...fullSeqs(myDeck)[0], ];
 
-      console.log('full0,full1, fullSlice', full0,full1, fullSlice);
-      console.log('canFit(full0,full1,)(fullSlice)', canFit(full0,full1,)(fullSlice));
       expect(canFit(fullFirst)(fullRest)).toBeTruthy();
       expect(canFit(full0,full1,)(fullSlice)).toBeTruthy();
     });
@@ -57,8 +55,7 @@ describe('fullSets', () => {
   });
   describe('allFit', () => {
     it('checks if all the porvided cards can fit into an arary of sets', () => {
-      console.log('fullSets(myDeck.slice(2))', fullSeqs(myDeck.slice(2)));
-      expect(allFit(fullSeqs(myDeck.slice(2)))(...myDeck.slice(0,2))).toBeTruthy();
+      expect(allFit(fullSeqs(myDeck.slice(2)))(myDeck.slice(0,2))).toBeTruthy();
     });
   });
   describe('findFit', () => {
@@ -67,8 +64,13 @@ describe('fullSets', () => {
     });
   });
   describe('possibles', () => {
+    it('retuns an array of sequences and sets', () => {
+      expect(possibles(myDeck)).toBeArray();
+    });
+  });
+  describe('possFits', () => {
     it('checks a deck of cards for all possible fits in an array of sets ', () => {
-      expect(possibles(myDeck.slice(0,2))(fullSets(myDeck.slice(2)))).toBeArray();
+      expect(possFits(myDeck.slice(0,2))(possibles(myDeck.slice(2)))).toBeArray();
     });
   });
 });
