@@ -4,7 +4,7 @@ import { player, } from 'src/player';
 import { active, game, players, } 
 from 'src/game/data';
 
-import { actAdd, addCards, addPlr, hasPlr, mendPlr, pushPlr, rotate, 
+import { claim, claimCards, addPlr, hasPlr, mendPlr, pushPlr, rotate, 
   turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
@@ -41,14 +41,14 @@ describe('Player ops', () => {
       expect(players(pushPlr(bob)(myGame))).toContain(bob);
     });
   });
-  describe('addCards', () => {
+  describe('claimCards', () => {
     it('adds cards to a players hands', () => {
-      expect(players(addCards(...first3)(jane)(myGame))).toBeArray();
+      expect(players(claimCards(...first3)(jane)(myGame))).toBeArray();
     });
   });
-  describe('actAdd', () => {
+  describe('claim', () => {
     it('adds cards to a players hands', () => {
-      expect(active(actAdd(...first3)(myGame)).hand).toContain(first3[0]);
+      expect(active(claim(...first3)(myGame)).hand).toContain(first3[0]);
     }); 
   });
 });

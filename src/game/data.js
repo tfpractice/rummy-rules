@@ -1,7 +1,7 @@
 import { Deck, } from 'bee52';
 import { flattenBin as flat, } from 'fenugreek-collections';
 import { sets, } from '../player';
-const { deck: bDeck, shuffle, } = Deck;
+const { deck: bDeck, shuffle, next: nextC, } = Deck;
 const init = { players: [], deck: shuffle(bDeck()), discard: [], }; 
 
 export const game = (players = [], deck = [], discard = []) =>
@@ -16,7 +16,7 @@ export const setPlayers = plrs => g => game(plrs, deck(g), discard(g));
 export const setDeck = dk => g => game(players(g), dk, discard(g));
 export const setDiscard = ds => g => game(players(g), deck(g), ds);
 
-export const next = g => deck(g)[0];
+export const next = g => nextC(deck(g));
 export const rest = g => deck(g).slice(1);
 
 export const active = ({ players: [ act, ], }) => act;

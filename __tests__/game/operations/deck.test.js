@@ -4,7 +4,7 @@ import { player, } from 'src/player';
 import { active, allSets, deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
-import { draw,rmDeck,shiftDk, } from 'src/game/operations/deck';
+import { draw,deckDel,shiftDk, } from 'src/game/operations/deck';
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
@@ -18,9 +18,9 @@ describe('Deck ops', () => {
       expect(deck(shiftDk(myGame)).length).toEqual(51);
     });
   });
-  describe('rmDeck', () => {
+  describe('deckDel', () => {
     it('removes a set of cards form the deck', () => {
-      expect(deck(rmDeck(...first3)(myGame)).length).toEqual(49);
+      expect(deck(deckDel(...first3)(myGame)).length).toEqual(49);
     });
   });
   describe('draw', () => {

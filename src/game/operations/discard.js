@@ -1,19 +1,18 @@
 import { Deck, } from 'bee52';
-import { discard as dPile, next, setDiscard as setDs, } from '../data';
-import { actAdd, } from './players';
-import { rmDeck, } from './deck';
+import { discard , next, setDiscard as setDs, } from '../data';
+import { claim, } from './players';
+import { deckDel, } from './deck';
 
-const { drop: dropD,add, } = Deck;
+const { add, drop: dropD,drawTo: upTo, } = Deck;
 
-export const rmDs = (...cards) => g => 
-  setDs(dropD(...cards)(dPile(g)))(rmDeck(...cards)(g));
+export const disDel = (...cards) => g => 
+  setDs(dropD(...cards)(discard(g)))(deckDel(...cards)(g));
   
-export const addToDs = (...cards) => g =>
-  setDs(add(...cards)(dPile(g)))(rmDeck(...cards)(g));
-  
-export const drawDs = (...cards) => g => actAdd(...cards)(rmDs(...cards)(g));
+export const disAdd = (...cards) => g =>
+  setDs(add(...cards)(discard(g)))(deckDel(...cards)(g));
 
-export const drop = (...cards) => g => addToDs(...cards)(g);
+export const drop = (...cards) => g => disAdd(...cards)(g);
 export const dropNext = g => drop(next(g))(g);
 
-export const drawTo = card => g => drawDs(...Deck.drawTo(card)(dPile(g)))(g);
+export const disDraw = (...cards) => g => claim(...cards)(disDel(...cards)(g));
+export const drawTo = card => g => disDraw(...upTo(card)(discard(g)))(g);

@@ -8,19 +8,19 @@ const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 
-import { addToDs, drawDs, drawTo, drop, dropNext, rmDs, } from 'src/game/operations/discard';
+import { disAdd, disDraw, drawTo, drop, dropNext, disDel, } from 'src/game/operations/discard';
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
 
 describe('discard ops', () => {
-  describe('rmDs', () => {
+  describe('disDel', () => {
     it('removes a set of cards form the deck', () => {
-      expect(discard(rmDs(...first3)(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
+      expect(discard(disDel(...first3)(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
     });
   });
-  describe('drawDs', () => {
+  describe('disDraw', () => {
     it('draws multiple cards from the discard pile', () => {
-      expect(discard(drawDs(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(5);
-      expect(discard(drawDs(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
+      expect(discard(disDraw(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(5);
+      expect(discard(disDraw(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
     });
   });
   describe('drawTo', () => {
@@ -29,9 +29,9 @@ describe('discard ops', () => {
       expect(discard(drawTo(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
     });
   });
-  describe('addToDs', () => {
+  describe('disAdd', () => {
     it('adds cards to the discard pile', () => {
-      expect(discard(addToDs(...first3)(myGame))).toContain(first3[0]);
+      expect(discard(disAdd(...first3)(myGame))).toContain(first3[0]);
     });
   });
   describe('drop', () => {
