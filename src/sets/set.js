@@ -1,5 +1,5 @@
 import { Deck, } from 'bee52';
-import { append ,every, filter, first, flattenBin as flat, flatten, some, spread, } 
+import { every, filter, first, flattenBin as flat, some, spread, } 
 from 'fenugreek-collections';
 import { hasMatch, rankSets,sequences, } from '../deck';
 import { exceeds, } from './utils';
@@ -28,4 +28,5 @@ export const findFit = sets => c => sets.filter(canFit(c));
 
 export const playables = deck => sets => 
   filter(possibles(deck))(hasFit(sets)).reduce(unionBin,[]);
-export const possFits = deck => sets => possibles(deck).map(findFit(sets)).reduce(flat,[]);
+export const possFits = deck => sets => 
+  possibles(deck).map(findFit(sets)).reduce(flat,[]);

@@ -1,5 +1,8 @@
 import * as Deck from './deck';
-import * as Compare from './compare';
+import * as Game from './game';
+import * as Player from './player';
+import * as Sets from './sets';
 import * as Score from './score';
+export * from './compare';
 
-export { Compare, Deck, Score, };
+export { Deck, Score,Sets, };
