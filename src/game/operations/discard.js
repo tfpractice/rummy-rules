@@ -1,6 +1,6 @@
 import { Deck, } from 'bee52';
-import { actAdd, } from './players';
 import { discard as dPile, next, setDiscard as setDs, } from '../data';
+import { actAdd, } from './players';
 import { rmDeck, } from './deck';
 
 const { drop: dropD,add, } = Deck;
