@@ -1,11 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { active, allSets, deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
+import { active, game, players, } 
 from 'src/game/data';
-
-import { addToDs, deal, dealBin, drawDs, drawTo, drop, dropNext, play,
-   playable, playPartial, playWhole, rmDeck, rmDs, shiftDk, } from 'src/game/operations';
 
 import { actAdd, addCards, addPlayer, addPlr, catPlr, hasP, rotate, turn, updateP, } from 'src/game/operations/players';
 

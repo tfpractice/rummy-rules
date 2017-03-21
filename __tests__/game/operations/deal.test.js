@@ -3,11 +3,6 @@ import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, discard, game, } from 'src/game/data';
 
-// import { addToDs, deal, dealBin, drawDs, drawTo, drop, dropNext, play,
-//    playable, playPartial, playWhole, rmDs, } from 'src/game/operations';
-
-// import { actAdd, addCards, addPlayer, addPlr, catPlr, hasP, rotate, turn, updateP, } from 'src/game/operations/players';
-// import { drawNext,rmDeck,shiftDk, } from 'src/game/operations/deck';
 import { deal, dealBin, } from 'src/game/operations/deal';
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
