@@ -19,8 +19,8 @@ export const isSet = cards => every(cards)(contains(first(fullSets(cards))));
 export const isFull = (...cards) => [ isSeq,isSet, ].some(f => f(cards));
 
 export const seqFit = pSeq => seq => isFull(...flat(seq,pSeq));
-export const canFit = card => set => isFull(...append(set)(card));
-export const hasFit = sets => card => some(sets)(canFit(card));
+export const canFit = (...cards) => set => isFull(...flat(set,cards));
+export const hasFit = sets => (...cards) => some(sets)(canFit(...cards));
 export const allFit = sets => (...cards) => every(cards)(hasFit(sets));
 export const everyFit = (...cards) => sets => every(cards)(hasFit(sets));
 export const findFit = sets => c => sets.filter(canFit(c));
