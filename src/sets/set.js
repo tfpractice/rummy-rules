@@ -1,5 +1,6 @@
 import { Deck, } from 'bee52';
-import { append ,every, first, flattenBin as flat, some, spread, } from 'fenugreek-collections';
+import { append ,every, first, flattenBin as flat, flatten, some, spread, } 
+from 'fenugreek-collections';
 import { hasMatch, rankSets,sequences, } from '../deck';
 import { exceeds, } from './utils';
 
@@ -17,6 +18,7 @@ export const isSeq = cards => every(cards)(contains(first(fullSeqs(cards))));
 export const isSet = cards => every(cards)(contains(first(fullSets(cards))));
 export const isFull = (...cards) => [ isSeq,isSet, ].some(f => f(cards));
 
+export const seqFit = pSeq => seq => isFull(...flat(seq,pSeq));
 export const canFit = card => set => isFull(...append(set)(card));
 export const hasFit = sets => card => some(sets)(canFit(card));
 export const allFit = sets => (...cards) => every(cards)(hasFit(sets));

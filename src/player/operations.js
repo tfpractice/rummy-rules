@@ -15,7 +15,10 @@ export const draw = amt => deck => p => addHand(...Deck.draw(amt)(deck))(p);
 export const drawTo = c => deck => p => addHand(...Deck.drawTo(c)(deck))(p);
 
 export const addSet = s => p => setSets(append(sets(p))((s)))(scrap(...s)(p));
-export const playBin = (p,set) => addSet(set)(p);
+export const playBin = (p,set) => {
+  console.log('set', set);
+  return addSet(set)(p); 
+};
 export const play = (...sets) => p => sets.map(spread).reduce(playBin, p);
 
 export const matches = next => p => next.id === p.id;

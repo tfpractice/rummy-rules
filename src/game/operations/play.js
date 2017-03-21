@@ -1,7 +1,7 @@
 import { Deck, } from 'bee52';
 import { allFit, hasFit, isFull, } from '../../sets';
 import { play as playC, } from '../../player';
-import { active, allSets, discard, } from '../data';
+import { active, allSets,discard, players, } from '../data';
 import { addPlr, turn, } from './players';
 import { deckDel, } from './deck';
 import { disDel, } from './discard';
@@ -23,4 +23,4 @@ export const play = (...cards) => g =>
 export const rumCheck = g => discard(g).some(hasFit(allSets(g)));
 export const rummable = g => discard(g).filter(hasFit(allSets(g)));
 export const rumDrop = g => (disDel(...rummable(g)));
-export const rummy = g => rumCheck(g) ? play(...rummable(g))(rumDrop(g)) : g;
+export const rummy = g => rumCheck(g) ? playPartial(...rummable(g))(rumDrop(g)) : g;
