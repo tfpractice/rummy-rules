@@ -1,10 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { active, allSets, deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
-from 'src/game/data';
+import { deck, game, } from 'src/game/data';
+import { deckDel, draw, shiftDk, } from 'src/game/operations/deck';
 
-import { draw,deckDel,shiftDk, } from 'src/game/operations/deck';
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
