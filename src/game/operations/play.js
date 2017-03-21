@@ -1,16 +1,21 @@
 import { Deck, } from 'bee52';
 import { asSet, } from 'fenugreek-collections';
 import { allFit, hasFit, isFull, possibles, } from '../../sets';
-import { play as playC, } from '../../player';
+import { addSets, } from '../../player';
 import { active, allSets,discard, players, } from '../data';
 import { addPlr, turn, } from './players';
 import { deckDel, } from './deck';
 import { disDel, } from './discard';
 
-export const actPlay = (...cards) => g => playC(...cards)(active(g));
+export const actPlay = (...cards) => g => addSets(...cards)(active(g));
 
-export const playWhole = (...cards) => g => addPlr(playC(cards)(active(g)))(g);
-export const playPartial = (...cards) => g => addPlr(playC(...cards)(active(g)))(g);
+export const claimSet = (...set) => p => g => addPlr(addSets(set)(p))(g);
+export const claimParts = (...set) => p => g => addPlr(addSets(...set)(p))(g);
+
+export const playWhole = (...sets) => g => 
+  addPlr(addSets(sets)(active(g)))(g);
+export const playPartial = (...sets) => g =>
+  addPlr(addSets(...sets)(active(g)))(g);
 
 export const playByType = set => g =>
   isFull(...set) ? playWhole(...set)(g) : playPartial(...set)(g);

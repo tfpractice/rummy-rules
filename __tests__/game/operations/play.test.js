@@ -2,7 +2,7 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { allSets, deck, game, } from 'src/game/data';
-import { claim, deckDel, play, playable, playPartial, playWhole, rumCheck, rummable, } from 'src/game/operations';
+import { claim, claimSet, deckDel, play, playable, playPartial, playWhole, rumCheck, rummable, } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -25,6 +25,8 @@ describe('play', () => {
     it('plays a partial set of cards', () => {
       const clubGame = playWhole(...first3)(myGame);
       const next2 = deck(myGame).slice(3, 5);
+
+      console.log('(allSets(playPartial(...next2)(clubGame))', (allSets(playPartial(...next2)(clubGame))));
       
       expect(allSets(playPartial(...next2)(clubGame)).length).toEqual(3);
     });
@@ -32,6 +34,12 @@ describe('play', () => {
   describe('playable', () => {
     it('checks if a set of cards is playable', () => {
       expect(playable(...first3)(myGame)).toBeTruthy();
+    });
+  });
+  describe('claimSet', () => {
+    it('adds a set to the specified player', () => {
+      console.log('allSets(claimSet(...first3)(jane)(myGame))', allSets(claimSet(...first3)(jane)(myGame)));
+      expect(allSets(claimSet(...first3)(jane)(myGame))).toBeArray();
     });
   });
   describe('play', () => {

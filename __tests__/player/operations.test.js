@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, player,sets, } from 'src/player/data';
-import { addHand, addSet, draw,drawTo, final, matches, play, playBin, score,scrap,
+import { addHand, addSet, addSets,draw, drawTo, final, matches, playBin, score,scrap,
    update, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
@@ -61,9 +61,9 @@ describe('Player', () => {
       expect(hand(update(dick)(dick)).length).toEqual(hand(dick).length);
     });
   });
-  describe('play', () => {
+  describe('addSets', () => {
     it('plays multiple sets', () => {
-      expect(sets(play(1,2,3)(dick))).toBeArray();
+      expect(sets(addSets(1,2,3)(dick))).toBeArray();
     });
   });
 });
