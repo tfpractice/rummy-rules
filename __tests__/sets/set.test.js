@@ -1,7 +1,7 @@
 import 'jasmine-expect';
-import { allFit, canFit,findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
-   isSet, playables, possFits, possibles, } from 'src/sets/set';
 import { Deck, } from 'bee52';
+import { allFit, canFit, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
+   isSet, playables, possFits, possibles, } from 'src/sets/set';
 
 const { deck, } = Deck;
 const myDeck = (deck());
@@ -24,14 +24,14 @@ describe('fullSets', () => {
   describe('isSeq', () => {
     it('checks if every card is in the first full seq', () => {
       expect(isSeq(fullSeqs(myDeck)[0])).toBeTruthy();
-      expect(isSeq([ ...fullSeqs(myDeck)[0], ].splice(0,2))).toBeFalse();
+      expect(isSeq([ ...fullSeqs(myDeck)[0], ].splice(0, 2))).toBeFalse();
       expect(isSeq([ myDeck[0], myDeck[15], ])).toBeFalse();
     });
   });
   describe('isSet', () => {
     it('checks if every card is in the first full seq', () => {
       expect(isSet(fullSets(myDeck)[0])).toBeTruthy();
-      expect(isSet([ ...fullSets(myDeck)[0], ].splice(0,2))).toBeFalse();
+      expect(isSet([ ...fullSets(myDeck)[0], ].splice(0, 2))).toBeFalse();
       expect(isSet([ myDeck[0], myDeck[15], ])).toBeFalse();
     });
   });
@@ -43,10 +43,10 @@ describe('fullSets', () => {
   describe('canFit', () => {
     it('checks if a card will fit into a sequece or a set', () => {
       const [ fullFirst, ...fullRest ] = [ ...fullSets(myDeck)[0], ];
-      const [ full0,full1, ...fullSlice ] = [ ...fullSeqs(myDeck)[0], ];
-
+      const [ full0, full1, ...fullSlice ] = [ ...fullSeqs(myDeck)[0], ];
+      
       expect(canFit(fullFirst)(fullRest)).toBeTruthy();
-      expect(canFit(full0,full1,)(fullSlice)).toBeTruthy();
+      expect(canFit(full0, full1,)(fullSlice)).toBeTruthy();
     });
   });
   describe('hasFit', () => {
@@ -56,7 +56,7 @@ describe('fullSets', () => {
   });
   describe('allFit', () => {
     it('checks if all the porvided cards can fit into an arary of sets', () => {
-      expect(allFit(fullSeqs(myDeck.slice(2)))(myDeck.slice(0,2))).toBeTruthy();
+      expect(allFit(fullSeqs(myDeck.slice(2)))(myDeck.slice(0, 2))).toBeTruthy();
     });
   });
   describe('findFit', () => {
@@ -71,12 +71,12 @@ describe('fullSets', () => {
   });
   describe('possFits', () => {
     it('checks a deck of cards for all possible fits in an array of sets ', () => {
-      expect(possFits(myDeck.slice(0,2))(possibles(myDeck.slice(2)))).toBeArray();
+      expect(possFits(myDeck.slice(0, 2))(possibles(myDeck.slice(2)))).toBeArray();
     });
   });
   describe('playables', () => {
     it('returns an arrays of playable cards', () => {
-      expect(playables(myDeck.slice(0,2))(possibles(myDeck.slice(2)))).toContain(myDeck[0]);
+      expect(playables(myDeck.slice(0, 2))(possibles(myDeck.slice(2)))).toContain(myDeck[0]);
     });
   });
 });

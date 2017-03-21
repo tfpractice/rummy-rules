@@ -2,8 +2,6 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { copy, hand, id,name, player,setHand, setID, setName, sets,setSets, } 
 from 'src/player/data';
- 
-const { shuffle, deck, } = Deck;
 
 const dick = player('dick',[],[],'dick');
 
