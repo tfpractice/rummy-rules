@@ -1,5 +1,5 @@
 import { Deck, } from 'bee52';
-import { claim, claimCards, } from './players';
+import { claim, } from './players';
 import { deck, next,rest, setDeck, } from '../data';
 
 const { drop, } = Deck;

@@ -1,8 +1,7 @@
 import { Deck, } from 'bee52';
-import { asSet, flattenBin as flat, } from 'fenugreek-collections';
-import { allFit, hasFit, isFull, playables, possFits, possibles, } from '../../sets';
+import { allFit, hasFit, isFull, playables, possibles, } from '../../sets';
 import { addSets, } from '../../player';
-import { active, allSets, discard, players, } from '../data';
+import { active, allSets, discard, } from '../data';
 import { addPlr, turn, } from './players';
 import { deckDel, } from './deck';
 import { disDel, } from './discard';
