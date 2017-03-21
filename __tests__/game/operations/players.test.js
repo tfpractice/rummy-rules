@@ -4,7 +4,8 @@ import { player, } from 'src/player';
 import { active, game, players, } 
 from 'src/game/data';
 
-import { actAdd, addCards, addPlayer, addPlr, catPlr, hasP, rotate, turn, updateP, } from 'src/game/operations/players';
+import { actAdd, addCards, addPlr, hasPlr, mendPlr, pushPlr, rotate, 
+  turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -24,20 +25,20 @@ describe('Player ops', () => {
       expect(players(turn(myGame))).toEqual([ jane, dick, ]);
     });
   });
-  describe('hasP', () => {
+  describe('hasPlr', () => {
     it('checks if any of the players match by id', () => {
-      expect(hasP(dick)(myGame)).toBeTruthy();
-      expect(hasP(bob)(myGame)).toBeFalse();
+      expect(hasPlr(dick)(myGame)).toBeTruthy();
+      expect(hasPlr(bob)(myGame)).toBeFalse();
     });
   });
-  describe('updateP', () => {
+  describe('mendPlr', () => {
     it('updates players', () => {
-      expect(players(updateP(jane)(myGame))).toContain(dick);
+      expect(players(mendPlr(jane)(myGame))).toContain(dick);
     });
   });
-  describe('catPlr', () => {
+  describe('pushPlr', () => {
     it('concatenates a new player', () => {
-      expect(players(catPlr(bob)(myGame))).toContain(bob);
+      expect(players(pushPlr(bob)(myGame))).toContain(bob);
     });
   });
   describe('addCards', () => {

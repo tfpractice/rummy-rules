@@ -4,10 +4,6 @@ import { player, } from 'src/player';
 import { active, allSets, deck, discard, game, next, players, setDeck, setDiscard, setPlayers, } 
 from 'src/game/data';
 
-import { addToDs, deal, dealBin, drawDs, drawTo, drop, dropNext, play,
-   playable, playPartial, playWhole, rmDs, } from 'src/game/operations';
-
-import { actAdd, addCards, addPlayer, addPlr, catPlr, hasP, rotate, turn, updateP, } from 'src/game/operations/players';
 import { draw,rmDeck,shiftDk, } from 'src/game/operations/deck';
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
