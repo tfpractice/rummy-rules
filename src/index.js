@@ -5,4 +5,4 @@ import * as Sets from './sets';
 import * as Score from './score';
 export * from './compare';
 
-export { Deck, Score,Sets, };
+export { Deck, Score,Sets,Game,Player, };
