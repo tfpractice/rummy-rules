@@ -4,7 +4,7 @@ import { player, } from 'src/player';
 import { active, game, players, } 
 from 'src/game/data';
 
-import { claim, claimCards, addPlr, hasPlr, mendPlr, pushPlr, rotate, 
+import { addPlr, claim, claimCards, hasPlr, mendPlr, pushPlr, rmPlr, rotate, 
   turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
@@ -39,6 +39,11 @@ describe('Player ops', () => {
   describe('pushPlr', () => {
     it('concatenates a new player', () => {
       expect(players(pushPlr(bob)(myGame))).toContain(bob);
+    });
+  }); 
+  describe('rmPlr', () => {
+    it('drops matching player', () => {
+      expect(players(rmPlr(jane)(myGame))).not.toContain(jane);
     });
   });
   describe('claimCards', () => {

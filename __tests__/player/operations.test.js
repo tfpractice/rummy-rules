@@ -36,6 +36,7 @@ describe('Player', () => {
   });
   describe('matches', () => {
     it('checks for player id equality', () => {
+      expect(matches({})([])).toBeTruthy();
       expect(matches(dick)(dick)).toBeTruthy();
       expect(matches(dick)(jane)).toBeFalse();
     });
