@@ -22,6 +22,7 @@ module.exports = {
     rules: {
         // Ignore Rules
         strict: 1,
+        'no-unused-expressions':0,
         'comma-spacing': 0,
         'new-parens': 0,
         'space-before-function-paren': 0,

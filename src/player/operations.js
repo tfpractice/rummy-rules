@@ -18,6 +18,7 @@ export const playBin = (p,set) => addSet(set)(p);
 export const addSets = (...sets) => p => sets.map(spread).reduce(playBin, p);
 
 export const matches = next => p => next.id === p.id;
+export const xMatches = next => p => !matches(next)(p);
 export const update = next => p => matches(next)(p) ? copy(next) : p;
 
 export const score = p => total(sets(p));

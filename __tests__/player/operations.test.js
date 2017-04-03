@@ -1,8 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, player,sets, } from 'src/player/data';
-import { addHand, addSet, addSets,draw, drawTo, final, matches, playBin, score,scrap,
-   update, } from 'src/player/operations';
+import { addHand, addSet, addSets,draw, drawTo, final, matches,playBin, score, scrap,update,
+   xMatches, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
 const dick = draw(7)(myDeck.slice(7))(player('dick', [], [], 'dick'));
@@ -35,9 +35,15 @@ describe('Player', () => {
     });
   });
   describe('matches', () => {
-    it('checks for player id', () => {
+    it('checks for player id equality', () => {
       expect(matches(dick)(dick)).toBeTruthy();
       expect(matches(dick)(jane)).toBeFalse();
+    });
+  });
+  describe('xMatches', () => {
+    it('checks for player id non-equality', () => {
+      expect(xMatches(dick)(jane)).toBeTruthy();
+      expect(xMatches(dick)(dick)).toBeFalse();
     });
   });
   describe('score', () => {
