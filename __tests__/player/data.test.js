@@ -1,6 +1,6 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { copy, hand, id,name, player,setHand, setID, setName, sets,setSets, } 
+import { copy, hand, id,name, player,reset,setHand, setID, setName, sets,setSets, } 
 from 'src/player/data';
 
 const dick = player('dick',[],[],'dick');
@@ -17,6 +17,11 @@ describe('Player', () => {
   describe('copy', () => {
     it('returns a copy of the player', () => {
       expect(copy(dick)).toEqual(dick);
+    });
+  });  
+  describe('reset', () => {
+    it('returns a copy of the player with an empty hand and no sets', () => {
+      expect(reset(dick).sets.length).toEqual(0);
     });
   });
   describe('setName,', () => {

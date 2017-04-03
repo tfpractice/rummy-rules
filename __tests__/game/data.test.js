@@ -1,9 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { active, allSets,deck, discard, game,next, passive, players, rest, setDeck, setDiscard, setPlayers, } 
-from 'src/game/data';
+import { active, allSets, deck, discard, game, id, matches, next, passive, players, reset, 
+  rest, setDeck, setDiscard, setID, setPlayers, } from 'src/game/data';
 
-const myGame = game([], Deck.shuffle(Deck.deck()), []);
+const myGame = game([]);
 
 describe('Game', () => {
   describe('game', () => {
@@ -11,11 +11,22 @@ describe('Game', () => {
       expect(players(myGame)).toBeArray();
       expect(deck(myGame)).toBeArray();
       expect(discard(myGame)).toBeArray();
+      expect(id(myGame)).toEqual('default');
     });
   });
   describe('next', () => {
     it('returns the next card in the deck', () => {
       expect(next(myGame)).toEqual(deck(myGame)[0]);
+    });
+  });
+  describe('reset', () => {
+    it('returns a game copy with a reshuffled deck and empty discard ', () => {
+      expect(deck(reset(myGame)).length).toEqual(52);
+    });
+  });
+  describe('matches', () => {
+    it('checks for id equality between games', () => {
+      expect(matches(myGame)(myGame)).toBeTruthy();
     });
   });
   describe('rest', () => {
@@ -47,6 +58,10 @@ describe('Game', () => {
   describe('setDiscard', () => {
     it('setst he discard attribute', () => {
       expect(discard(setDiscard(Deck.deck().slice(3))(myGame)).length).toBe(49);
+    });
+  }); describe('setID', () => {
+    it('returns a copy of the game with a new Id', () => {
+      expect(id(setID('lol')(game))).toEqual('lol');
     });
   });
   describe('allSets', () => {

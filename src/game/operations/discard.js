@@ -1,13 +1,13 @@
 import { Deck, } from 'bee52';
-import { discard , next, setDiscard as setDs, } from '../data';
+import { discard, next, setDiscard as setDs, } from '../data';
 import { claim, } from './players';
 import { deckDel, } from './deck';
 
-const { add, drop: dropD,drawTo: upTo, } = Deck;
+const { add, drop: dropD, drawTo: upTo, } = Deck;
 
 export const disDel = (...cards) => g => 
   setDs(dropD(...cards)(discard(g)))(deckDel(...cards)(g));
-  
+
 export const disAdd = (...cards) => g =>
   setDs(add(...cards)(discard(g)))(deckDel(...cards)(g));
 
