@@ -3,6 +3,8 @@ import { addHand, matches, scrap, update, xMatches, } from '../../player';
 import { active, next, players, setPlayers as setP, } from '../data';
 import { disDel, drop, } from './discard';
 import { shiftDk, } from './deck';
+const { add, drop: dropD, drawTo: upTo, } = Deck;
+
 export const rotate = ([ first, ...rem ]) => [ ...rem, first, ];
 
 export const turn = g => setP(rotate(players(g)))(g);
@@ -26,6 +28,7 @@ export const deckDraw = p => g =>
 export const disDraw = p => g => 
     isActive(g)(p) ? claimCards(next(g))(p)(shiftDk(g)) : g;
     
-// export const drawTo = card => g => disDraw(...upTo(card)(discard(g)))(g);
+export const drawTo = card => g => 
+  disDraw(...upTo(card)(discard(g)))(g);
 
 export const claim = (...cards) => g => claimCards(...cards)(active(g))(g);
