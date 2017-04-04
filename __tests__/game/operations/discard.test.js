@@ -46,9 +46,9 @@ describe('discard ops', () => {
     });
   });
   
-  describe('dropNext', () => {
-    it('shifts the deck and discards the first card in the deck', () => {
-      expect(deck(dropNext(myGame)).length).toEqual(51);  
-    });
-  });
+  // describe('dropNext', () => {
+  //   it('shifts the deck and discards the first card in the deck', () => {
+  //     expect(deck(dropNext(myGame)).length).toEqual(51);  
+  //   });
+  // });
 });

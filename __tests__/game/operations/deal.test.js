@@ -3,7 +3,7 @@ import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, discard, game, } from 'src/game/data';
 
-import { deal, dealBin, } from 'src/game/operations/deal';
+import { deal, dealBin, dropNext, } from 'src/game/operations/deal';
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
@@ -27,5 +27,10 @@ describe('dealBin', () => {
 describe('deal', () => {
   it('deals 7 cards to each player', () => {
     expect(deck(deal(7)(myGame)).length).toEqual(37);
+  });
+});
+describe('dropNext', () => {
+  it('shifts the deck and discards the first card in the deck', () => {
+    expect(deck(dropNext(myGame)).length).toEqual(51);  
   });
 });

@@ -10,7 +10,7 @@ export const disAdd = (...cards) => g => setDs(add(...cards)(discard(g)))(g);
 
 export const drop = (...cards) => g => disAdd(...cards)(g);
 
-export const dropNext = g => disAdd(next(g))(deckDel(next(g))(g));
+// export const dropNext = g => disAdd(next(g))(deckDel(next(g))(g));
 
 export const disDraw = (...cards) => g => claim(...cards)(disDel(...cards)(g));
 export const drawTo = card => g => disDraw(...upTo(card)(discard(g)))(g);
