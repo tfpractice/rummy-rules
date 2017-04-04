@@ -1,9 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { player, } from 'src/player';
-import { active, deck, discard, game, players,setDiscard, } from 'src/game/data';
-import { addPlr, claim, claimCards, dropCards, hasPlr, isActive, mendPlr, 
-  pdeckDraw, pdisDraw, pdrawTo, pushPlr, rmPlr, rotate, turn, } from 'src/game/operations/players';
+import { hand, matches, player, } from 'src/player';
+import { active, deck, discard, game, players, setDiscard, } from 'src/game/data';
+import { addPlr, claim, claimCards, deckDraw, dropCards, hasPlr, isActive, 
+  mendPlr, pdisDraw, pdrawTo, pushPlr, rmPlr, rotate, scrapCards, turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -16,6 +16,8 @@ describe('Player ops', () => {
   describe('rotate', () => {
     it('places the first element in an array at the end', () => {
       expect(rotate([ 1, 2, 3, ])).toEqual([ 2, 3, 1, ]);
+      expect(rotate([])).toEqual([ ]);
+      expect(rotate()).toEqual([ ]);
     });
   });
   describe('turn', () => {
@@ -27,6 +29,7 @@ describe('Player ops', () => {
     it('checks if any of the players match by id', () => {
       expect(hasPlr(dick)(myGame)).toBeTruthy();
       expect(hasPlr(bob)(myGame)).toBeFalse();
+      expect(hasPlr()(myGame)).toBeFalsy();
     });
   });
   describe('isActive', () => {
@@ -58,8 +61,15 @@ describe('Player ops', () => {
   describe('claimCards', () => {
     it('adds cards to a players hands', () => {
       expect(players(claimCards(...first3)(jane)(myGame))).toBeArray();
+      expect(hand(players(claimCards(...first3)(jane)(myGame)).find(matches(jane)))).toContain(...first3);
+      expect(players(claimCards()()())).toBeArray();
     });
   }); 
+  describe('scrapCards', () => {
+    it('removes cards from a players hand', () => {
+      expect(hand(players(scrapCards(...first3)(jane)(myGame)).find(matches(jane)))).not.toContain(...first3);
+    });
+  });
   describe('dropCards', () => {
     it('adds cards to a players hands', () => {
       expect(players(dropCards(...first3)(jane)(myGame))).toBeArray();
@@ -71,7 +81,7 @@ describe('Player ops', () => {
       expect(active(claim(...first3)(myGame)).hand).toContain(first3[0]);
     }); 
   });
-
+  
   // describe('deckDraw', () => {
   //   describe('when player is active', () => {
   //     it('draws the next card to thespecified player', () => {
