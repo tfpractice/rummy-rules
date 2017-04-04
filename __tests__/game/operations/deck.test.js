@@ -2,7 +2,7 @@ import 'jasmine-expect';
 import { Card, Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, game, setDeck, } from 'src/game/data';
-import { deckAdd, deckDel, deckDraw, deckNext, draw, shiftDk, } from 'src/game/operations/deck';
+import { deckAdd, deckDel, deckNext, shiftDk, } from 'src/game/operations/deck';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -35,9 +35,10 @@ describe('Deck ops', () => {
       expect((deckNext(setDeck([])(myGame)))).toBeFalsy();
     });
   });
-  describe('draw', () => {
-    it('draws the next card to the activ player', () => {
-      expect(deck(draw(myGame)).length).toEqual(51);
-    });
-  });
+
+  // describe('draw', () => {
+  //   it('draws the next card to the activ player', () => {
+  //     expect(deck(draw(myGame)).length).toEqual(51);
+  //   });
+  // });
 });
