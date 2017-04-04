@@ -2,7 +2,7 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, game, } from 'src/game/data';
-import { deckDel, draw, shiftDk, } from 'src/game/operations/deck';
+import { deckDel, deckDraw, draw,shiftDk, } from 'src/game/operations/deck';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');

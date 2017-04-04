@@ -1,9 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { active, discard, game, players, } from 'src/game/data';
-import { addPlr, claim, claimCards, dropCards, hasPlr, isActive, mendPlr, 
-  pushPlr, rmPlr, rotate, turn, } from 'src/game/operations/players';
+import { active, deck, discard, game,players, } from 'src/game/data';
+import { addPlr, claim, claimCards, deckDraw, dropCards, hasPlr, isActive, 
+  mendPlr, pushPlr, rmPlr, rotate, turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -70,5 +70,17 @@ describe('Player ops', () => {
     it('adds cards to a players hands', () => {
       expect(active(claim(...first3)(myGame)).hand).toContain(first3[0]);
     }); 
+  });
+  describe('deckDraw', () => {
+    describe('when player is active', () => {
+      it('draws the next card to thespecified player', () => {
+        expect(deck(deckDraw(dick)(myGame)).length).toEqual(51);
+      });
+    });
+    describe('when player is inactive', () => {
+      it('draws the next card to thespecified player', () => {
+        expect(deck(deckDraw(jane)(myGame)).length).toEqual(52);
+      });
+    });
   });
 });

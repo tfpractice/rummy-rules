@@ -10,5 +10,6 @@ export const deckDrop = (...cards) => g => setDeck(drop(...cards)(deck(g)))(g);
 
 export const draw = g => claim(next(g))(shiftDk(g));
 export const deckDraw = p => g => 
-isActive(g)(p) ? claimCards(next(g))(p)(shiftDk(g)) : g;
+  isActive(g)(p) ? claimCards(next(g))(p)(shiftDk(g)) : g;
+  
 export const drawNext = g => claim(next(g))(shiftDk(g));
