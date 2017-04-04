@@ -13,5 +13,5 @@ export const disAdd = (...cards) => g => setDs(add(...cards)(discard(g)))(g);
 
 export const drop = (...cards) => g => disAdd(...cards)(g);
 
-export const selectTo = c => g => Deck.drawTo(c)(discard(g));
+export const selectTo = card => g => card ? Deck.drawTo(card)(discard(g)) : [];
 export const disDelTo = card => g => disDel(...selectTo(card)(g))(g);

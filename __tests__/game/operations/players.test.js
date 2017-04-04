@@ -2,13 +2,15 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, matches, player, } from 'src/player';
 import { active, deck, discard, game, players, setDiscard, } from 'src/game/data';
-import { addPlr, claim, claimCards, deckDraw, dropCards, hasPlr, isActive, 
-  mendPlr, pdisDraw, pdrawTo, pushPlr, rmPlr, rotate, scrapCards, turn, } from 'src/game/operations/players';
+import { disAdd, } from 'src/game/operations/discard';
+import { addPlr, claim, claimCards, deckDraw, disDraw, drawTo, dropCards, 
+  hasPlr, isActive, mendPlr, pushPlr, rmPlr, rotate, scrapCards, turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
+const first6 = Deck.deck().slice(0, 6);
 
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
 
@@ -82,28 +84,31 @@ describe('Player ops', () => {
     }); 
   });
   
-  // describe('deckDraw', () => {
-  //   describe('when player is active', () => {
-  //     it('draws the next card to thespecified player', () => {
-  //       expect(deck(deckDraw(dick)(myGame)).length).toEqual(51);
-  //     });
-  //   });
-  //   describe('when player is inactive', () => {
-  //     it('draws the next card to thespecified player', () => {
-  //       expect(deck(deckDraw(jane)(myGame)).length).toEqual(52);
-  //     });
-  //   });
-  // });
-  // describe('disDraw', () => {
-  //   it('draws multiple cards from the discard pile', () => {
-  //     expect(discard(disDraw(first3[2])(dick)(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(5);
-  //     expect(discard(disDraw(first3[2])(dick)(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
-  //   });
-  // });
-  // describe('drawTo', () => {
-  //   it('draws multiple cards into the active players hand', () => {
-  //     expect(discard(drawTo(first3[2])(dick)(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
-  //     expect(discard(drawTo(first3[2])(dick)(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
-  //   });
-  // });
+  describe('deckDraw', () => {
+    describe('when player is active', () => {
+      it('draws the next card to thespecified player', () => {
+        expect(deck(deckDraw(dick)(myGame)).length).toEqual(51);
+      });
+    });
+    describe('when player is inactive', () => {
+      it('draws the next card to thespecified player', () => {
+        expect(deck(deckDraw(jane)(myGame)).length).toEqual(52);
+      });
+    });
+  });
+  describe('disDraw', () => {
+    it('draws multiple cards from the discard pile', () => {
+      expect(discard(disDraw(first3[2])(dick)(disAdd(...first6)(myGame))).length).toEqual(5);
+      expect(discard(disDraw(first3[2])(jane)(disAdd(...first6)(myGame))).length).not.toEqual(5);
+      expect(discard(disDraw(first3[2])(dick)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
+      expect(discard(disDraw(first3[2])(jane)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
+    });
+  });
+  
+  describe('drawTo', () => {
+    it('draws multiple cards into the active players hand', () => {
+      expect(discard(drawTo(first3[2])(dick)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
+      expect(discard(drawTo(first3[2])(dick)(disAdd(...first6)(myGame))).length).not.toEqual(5);
+    });
+  });
 });

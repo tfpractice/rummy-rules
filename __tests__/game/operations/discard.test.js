@@ -9,8 +9,8 @@ const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 const first6 = Deck.deck().slice(0, 6);
 
-import { disAdd, disDel, drop, } from 'src/game/operations/discard';
-const myGame = game([ dick, jane, ], (Deck.deck()), []);
+import { disAdd, disDel, disDelTo, drop, selectTo, } from 'src/game/operations/discard';
+const myGame = game([ dick, jane, ], Deck.deck(), []);
 
 describe('discard ops', () => {
   describe('disAdd', () => {
@@ -21,6 +21,17 @@ describe('discard ops', () => {
   describe('disDel', () => {
     it('removes a set of cards form the discard', () => {
       expect(discard(disDel(...first3)(disAdd(...first6)(myGame))).length).toEqual(3);
+    });
+  });
+  describe('selectTo', () => {
+    it('returns all the cards in the discard pile up to the card', () => {
+      expect(selectTo(deck(myGame)[2])((disAdd(...first6)(myGame))).length).toEqual(3);
+    });
+  });
+  describe('disDelTo', () => {
+    it('removes all cards from the beginning to the selected card', () => {
+      console.log('discard(disDelTo(deck(myGame)[2])(disAdd(...first6)(myGame)))', discard(disDelTo()(disAdd(...first6)(myGame))));
+      expect(discard(disDelTo(deck(myGame)[2])(disAdd(...first6)(myGame))).length).toEqual(3);
     });
   });
 
