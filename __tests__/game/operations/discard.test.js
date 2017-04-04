@@ -9,7 +9,7 @@ const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 const first6 = Deck.deck().slice(0, 6);
 
-import { disAdd, disDel, disDraw, drawTo, drop, dropNext, } from 'src/game/operations/discard';
+import { disAdd, disDel, drop, } from 'src/game/operations/discard';
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
 
 describe('discard ops', () => {
@@ -23,23 +23,24 @@ describe('discard ops', () => {
       expect(discard(disDel(...first3)(disAdd(...first6)(myGame))).length).toEqual(3);
     });
   });
-  describe('disDraw', () => {
-    it('draws multiple cards from the discard pile', () => {
-      expect(discard(disDraw(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(5);
-      expect(discard(disDraw(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
-    });
-  });
-  describe('drawTo', () => {
-    it('draws multiple cards into the active players hand', () => {
-      expect(discard(drawTo(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
-      expect(discard(drawTo(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
-    });
-  });
-  describe('disAdd', () => {
-    it('adds cards to the discard pile', () => {
-      expect(discard(disAdd(...first3)(myGame))).toContain(first3[0]);
-    });
-  });
+
+  // describe('disDraw', () => {
+  //   it('draws multiple cards from the discard pile', () => {
+  //     expect(discard(disDraw(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(5);
+  //     expect(discard(disDraw(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
+  //   });
+  // });
+  // describe('drawTo', () => {
+  //   it('draws multiple cards into the active players hand', () => {
+  //     expect(discard(drawTo(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame)))).not.toContain(first3[2]);
+  //     expect(discard(drawTo(first3[2])(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
+  //   });
+  // });
+  // describe('disAdd', () => {
+  //   it('adds cards to the discard pile', () => {
+  //     expect(discard(disAdd(...first3)(myGame))).toContain(first3[0]);
+  //   });
+  // });
   describe('drop', () => {
     it('returns a game with a card appeneded to the discard pile', () => {
       expect(discard(drop(next(myGame))(myGame)).length).toEqual(1);

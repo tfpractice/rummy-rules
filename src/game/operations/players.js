@@ -25,13 +25,15 @@ export const scrapCards = (...cards) => p => g => addPlr(scrap(...cards)(p))(g);
 export const deckDraw = p => g => 
   isActive(g)(p) ? claimCards(deckNext(g))(p)(shiftDk(g)) : g;
   
+export const disDraw = (...cards) => p => g =>  
+isActive(g)(p) ? claimCards(...cards)(p)(disDel(...cards)(g)) : g;
+
+export const drawTo = c => p => g => disDraw(...upTo(c)(discard(g)))(p)(g); 
+  
 export const dropCards = (...cards) => p => g =>
   addPlr(scrap(...cards)(p))(drop(...cards)(g)); 
 
 export const pdisDraw = (...cards) => p => g => 
   isActive(g)(p) ? claimCards(...cards)(p)(disDel(...cards)(g)) : g;
-
-export const pdrawTo = c => p => g => 
-  isActive(g)(p) ? pdisDraw(...upTo(c)(discard(g)))(p)(g) : g;
 
 export const claim = (...cards) => g => claimCards(...cards)(active(g))(g);

@@ -10,6 +10,5 @@ const pCount = g => players(g).length;
 const dealRange = (ct = 0) => g => revRange(ct * pCount(g));
 
 export const dropNext = g => disAdd(deckNext(g))(shiftDk(g));
-
 export const dealBin = (g, n) => n ? turn(draw(g)) : dropNext(turn(draw(g)));
 export const deal = amt => g => dealRange(amt)(g).reduce(dealBin, g);
