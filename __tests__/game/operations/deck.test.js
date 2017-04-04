@@ -2,7 +2,7 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, game, } from 'src/game/data';
-import { deckDel, deckDraw, draw,shiftDk, } from 'src/game/operations/deck';
+import { deckAdd, deckDel, deckDraw, draw,shiftDk, } from 'src/game/operations/deck';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -20,6 +20,11 @@ describe('Deck ops', () => {
   describe('deckDel', () => {
     it('removes a set of cards form the deck', () => {
       expect(deck(deckDel(...first3)(myGame)).length).toEqual(49);
+    });
+  }); 
+  describe('deckAdd', () => {
+    it('removes a set of cards form the deck', () => {
+      expect(deck(deckAdd(...first3)(myGame)).length).toEqual(52);
     });
   });
   describe('draw', () => {
