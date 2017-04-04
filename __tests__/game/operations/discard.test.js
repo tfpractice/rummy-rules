@@ -7,14 +7,20 @@ const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
+const first6 = Deck.deck().slice(0, 6);
 
-import { disAdd, disDraw, drawTo, drop, dropNext, disDel, } from 'src/game/operations/discard';
+import { disAdd, disDel, disDraw, drawTo, drop, dropNext, } from 'src/game/operations/discard';
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
 
 describe('discard ops', () => {
+  describe('disAdd', () => {
+    it('adds a set of cards to the discard pile', () => {
+      expect(discard(disAdd(...first3)(myGame)).length).toEqual(3);
+    });
+  });
   describe('disDel', () => {
-    it('removes a set of cards form the deck', () => {
-      expect(discard(disDel(...first3)(setDiscard(deck(myGame).slice(0, 6))(myGame))).length).toEqual(3);
+    it('removes a set of cards form the discard', () => {
+      expect(discard(disDel(...first3)(disAdd(...first6)(myGame))).length).toEqual(3);
     });
   });
   describe('disDraw', () => {
