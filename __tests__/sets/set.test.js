@@ -1,15 +1,27 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { allFit, canFit, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
-   isSet, playables, possFits, possibles, } from 'src/sets/set';
+   isSet, matches, playables, possFits, possibles, xMatches, } from 'src/sets/set';
 
 const { deck, } = Deck;
 const myDeck = (deck());
 const myHand = myDeck.slice(1, 7);
 const first = myDeck[0];
 const sixes = (myDeck.filter(c => c.rank === '6'));
+const mySets = fullSets(myDeck);
 
 describe('fullSets', () => {
+  describe('matches', () => {
+    it('checks if the lenght of the difference is 0', () => {
+      expect(matches(mySets[0])(mySets[0])).toBeTrue();
+      expect(matches(mySets[0])(mySets[1])).toBeFalse();
+    });
+  }); describe('xMatches', () => {
+    it('checks if the lenght of the difference is 0', () => {
+      expect(xMatches(mySets[0])(mySets[0])).toBeFalse();
+      expect(xMatches(mySets[0])(mySets[1])).toBeTrue();
+    });
+  });
   describe('fullSets', () => {
     it('returns all sets from a collection of cards which exceed 2', () => {
       expect(fullSets(myDeck).every(x => [ ...x, ].length > 2)).toBeTruthy();

@@ -2,11 +2,14 @@ import { Deck, } from 'bee52';
 import { every, filter, first, flattenBin as flat, some, spread, } 
 from 'fenugreek-collections';
 import { hasMatch, rankSets,sequences, } from '../deck';
-import { exceeds, } from './utils';
+import { exceeds, len, } from './utils';
 
-const { draw,add, contains,unionBin, } = Deck;
+const { draw,add,diff, contains,unionBin, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
+
+export const matches = next => s => len(diff(s)(next)) === 0;
+export const xMatches = next => s => !matches(next)(s);
 
 export const seqWith = c => deck => sequences(add(c)(deck)).filter(hasMatch(c));
 export const setWith = c => deck => rankSets(add(c)(deck)).filter(hasMatch(c));

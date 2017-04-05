@@ -26,6 +26,7 @@ describe('Player', () => {
   });
   describe('scrap', () => {
     it('removes cards from a players hand', () => {
+      console.log('hand(scrap(hand(dick)[0])(dick))', hand(scrap(hand(dick)[0])(dick)));
       expect(hand(scrap(hand(dick)[0])(dick)).length).toEqual(6);
     });
   });

@@ -1,9 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { copy, hand, id,name, player,reset,setHand, setID, setName, sets,setSets, } 
+import { copy, hand, id, name, player, reset, setHand, setID, setName, sets, setSets, } 
 from 'src/player/data';
 
-const dick = player('dick',[],[],'dick');
+const dick = player('dick', [], [], 'dick');
 
 describe('Player', () => {
   describe('player', () => {
@@ -36,12 +36,12 @@ describe('Player', () => {
   });
   describe('setSets,', () => {
     it('sets the attribute', () => {
-      expect(hand(setHand([ 1,2,3, ])(dick))).toEqual([ 1,2,3, ]);
+      expect(hand(setHand([1, 2, 3,])(dick))).toEqual([1, 2, 3,]);
     });
   });
   describe('setID,', () => {
     it('sets the attribute', () => {
-      expect(sets(setSets([ 3,4,5, ])(dick))).toEqual([ 3,4,5, ]);
+      expect(sets(setSets([3, 4, 5,])(dick))).toEqual([3, 4, 5,]);
     });
   });
 });
