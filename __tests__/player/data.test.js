@@ -1,9 +1,12 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { copy, hand, id, name, player, reset, setHand, setID, setName, sets, setSets, } 
-from 'src/player/data';
+import { addSet, draw, } from 'src/player/operations';
+import { copy, final, hand, id, matches, name, player, reset, score, setHand,
+  setID, setName, sets, setSets, update, xMatches, } from 'src/player/data';
 
-const dick = player('dick', [], [], 'dick');
+const myDeck = Deck.deck();
+const dick = draw(7)(myDeck.slice(7))(player('dick', [], [], 'dick'));
+const jane = draw(7)(myDeck.slice(7))(player('jane', [], [], 'jane'));
 
 describe('Player', () => {
   describe('player', () => {
@@ -36,12 +39,41 @@ describe('Player', () => {
   });
   describe('setSets,', () => {
     it('sets the attribute', () => {
-      expect(hand(setHand([1, 2, 3,])(dick))).toEqual([1, 2, 3,]);
+      expect(hand(setHand([ 1, 2, 3, ])(dick))).toEqual([ 1, 2, 3, ]);
     });
   });
   describe('setID,', () => {
     it('sets the attribute', () => {
-      expect(sets(setSets([3, 4, 5,])(dick))).toEqual([3, 4, 5,]);
+      expect(sets(setSets([ 3, 4, 5, ])(dick))).toEqual([ 3, 4, 5, ]);
+    });
+  });
+  describe('matches', () => {
+    it('checks for player id equality', () => {
+      expect(matches({})([])).toBeTruthy();
+      expect(matches(dick)(dick)).toBeTruthy();
+      expect(matches(dick)(jane)).toBeFalse();
+    });
+  });
+  describe('xMatches', () => {
+    it('checks for player id non-equality', () => {
+      expect(xMatches(dick)(jane)).toBeTruthy();
+      expect(xMatches(dick)(dick)).toBeFalse();
+    });
+  });
+  describe('score', () => {
+    it('calculates the points of theplayers sets', () => {
+      expect(score(dick)).toEqual(0);
+      expect(score(addSet(myDeck.filter(x => x.rank === '2'))(dick))).toBe(20);
+    });
+  });
+  describe('final', () => {
+    it('return the score minus the leftover deductions', () => {
+      expect(final(addSet(myDeck.filter(x => x.rank === '2'))(dick))).toBe(-40);
+    });
+  });
+  describe('update', () => {
+    it('replaces the old player with new props if they match', () => {
+      expect(hand(update(dick)(dick)).length).toEqual(hand(dick).length);
     });
   });
 });

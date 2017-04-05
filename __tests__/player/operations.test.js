@@ -1,8 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { hand, player,sets, } from 'src/player/data';
-import { addHand, addSet, addSets,draw, drawTo, final, matches,playBin, score, scrap,update,
-   xMatches, } from 'src/player/operations';
+import { hand, player, sets, } from 'src/player/data';
+import { addHand, addSet, addSets, delSet, draw, drawTo, playBin, scrap, } from 'src/player/operations';
 
 const myDeck = Deck.deck();
 const dick = draw(7)(myDeck.slice(7))(player('dick', [], [], 'dick'));
@@ -21,57 +20,32 @@ describe('Player', () => {
   });
   describe('addHand', () => {
     it('adds cards to a players hand', () => {
-      expect(hand(addHand(...myDeck.slice(15,17))(jane))).toContain(myDeck[16]);
+      expect(hand(addHand(...myDeck.slice(15, 17))(jane))).toContain(myDeck[16]);
     });
   });
   describe('scrap', () => {
     it('removes cards from a players hand', () => {
-      console.log('hand(scrap(hand(dick)[0])(dick))', hand(scrap(hand(dick)[0])(dick)));
       expect(hand(scrap(hand(dick)[0])(dick)).length).toEqual(6);
     });
   });
   describe('addSet', () => {
     it('apppends a set of crds to th eplayers psets array', () => {
-      expect(sets(addSet(hand(dick).slice(0,3))(dick)).length).toEqual(1);
+      expect(sets(addSet(hand(dick).slice(0, 3))(dick)).length).toEqual(1);
     });
-  });
-  describe('matches', () => {
-    it('checks for player id equality', () => {
-      expect(matches({})([])).toBeTruthy();
-      expect(matches(dick)(dick)).toBeTruthy();
-      expect(matches(dick)(jane)).toBeFalse();
-    });
-  });
-  describe('xMatches', () => {
-    it('checks for player id non-equality', () => {
-      expect(xMatches(dick)(jane)).toBeTruthy();
-      expect(xMatches(dick)(dick)).toBeFalse();
-    });
-  });
-  describe('score', () => {
-    it('calculates the points of theplayers sets', () => {
-      expect(score(dick)).toEqual(0);
-      expect(score(addSet(myDeck.filter(x => x.rank === '2'))(dick))).toBe(20);
-    });
-  });
-  describe('final', () => {
-    it('return the score minus the leftover deductions', () => {
-      expect(final(addSet(myDeck.filter(x => x.rank === '2'))(dick))).toBe(-40);
+  }); 
+  describe('delSet', () => {
+    it('removes a set of crds to th eplayers psets array', () => {
+      expect(sets(delSet(hand(dick).slice(0, 3))(addSet(hand(dick).slice(0, 3))(dick))).length).toEqual(0);
     });
   });
   describe('playBin', () => {
     it('apppends a set of crds to th eplayers psets array', () => {
-      expect(sets(playBin(dick,hand(dick).slice(0,3))).length).toEqual(1);
-    });
-  });
-  describe('update', () => {
-    it('replaces the old player with new props if they match', () => {
-      expect(hand(update(dick)(dick)).length).toEqual(hand(dick).length);
+      expect(sets(playBin(dick, hand(dick).slice(0, 3))).length).toEqual(1);
     });
   });
   describe('addSets', () => {
     it('plays multiple sets', () => {
-      expect(sets(addSets(1,2,3)(dick))).toBeArray();
+      expect(sets(addSets(1, 2, 3)(dick))).toBeArray();
     });
   });
 });
