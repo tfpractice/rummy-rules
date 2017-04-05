@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { active, allSets, deck, discard, game, id, matches, next, passive, players, reset, 
-  rest, setDeck, setDiscard, setID, setPlayers, } from 'src/game/data';
+import { active, allSets, deck, discard, game, id, matches, passive, players, 
+  reset, setDeck, setDiscard, setID, setPlayers, } from 'src/game/data';
 
 const myGame = game([]);
 
@@ -14,11 +14,6 @@ describe('Game', () => {
       expect(id(myGame)).toEqual('default');
     });
   });
-  describe('next', () => {
-    it('returns the next card in the deck', () => {
-      expect(next(myGame)).toEqual(deck(myGame)[0]);
-    });
-  });
   describe('reset', () => {
     it('returns a game copy with a reshuffled deck and empty discard ', () => {
       expect(deck(reset(myGame)).length).toEqual(52);
@@ -27,11 +22,6 @@ describe('Game', () => {
   describe('matches', () => {
     it('checks for id equality between games', () => {
       expect(matches(myGame)(myGame)).toBeTruthy();
-    });
-  });
-  describe('rest', () => {
-    it('returns the cards after the first in the deck', () => {
-      expect(rest(myGame)).toEqual(deck(myGame).slice(1));
     });
   });
   describe('active', () => {

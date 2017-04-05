@@ -2,7 +2,8 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { allSets, deck, discard,game, } from 'src/game/data';
-import { claim, claimSet, deckDel, play, playable, playPartial,playWhole, rumCheck, rumDrop, rummable, rummy, } from 'src/game/operations';
+import { actClaim, claimSet, deckDel, play, playable, playPartial,playWhole, rumCheck, rumDrop, rummable, rummy,
+ } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -12,7 +13,7 @@ const first3 = Deck.deck().slice(0, 3);
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
 const rumGame = game([ dick, jane, ], (Deck.deck().slice(9)), Deck.deck().slice(0, 9));
 const d4 = deck(rumGame).slice(0, 4);
-const rClaim = claim(...d4)(deckDel(...d4)(rumGame)); 
+const rClaim = actClaim(...d4)(deckDel(...d4)(rumGame)); 
 const queens = deck(rumGame).filter(c => c.rank === 'q');
 const rPlay = (playWhole(...d4)(rClaim));
 

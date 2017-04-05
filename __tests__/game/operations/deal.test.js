@@ -2,13 +2,11 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, discard, game, } from 'src/game/data';
-
 import { deal, dealBin, dropNext, } from 'src/game/operations/deal';
+
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
-const first3 = Deck.deck().slice(0, 3);
-
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
 
 describe('dealBin', () => {

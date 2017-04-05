@@ -34,4 +34,6 @@ export const dropCards = (...cards) => p => g =>
   addPlr(scrap(...cards)(p))(drop(...cards)(g)); 
 
 export const actClaim = (...cards) => g => claimCards(...cards)(active(g))(g);
-export const claim = actClaim;
+
+// export const claim = actClaim;
+export const actDrawNext = g => actClaim(deckNext(g))(shiftDk(g));

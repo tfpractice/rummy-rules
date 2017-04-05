@@ -1,13 +1,13 @@
 import { Deck, } from 'bee52';
-import { claim, } from './players';
-import { deck, next,rest, setDeck, } from '../data';
+import { actClaim, } from './players';
+import { deck, setDeck as setDk, } from '../data';
 
-const { drop, add, } = Deck;
+const { drop, add, rest, next, } = Deck;
 
-export const shiftDk = game => setDeck(rest(game))(game);
-export const deckNext = g => Deck.next(deck(g));
+export const deckNext = g => next(deck(g));
+export const shiftDk = game => setDk(rest(deck(game)))(game);
 
-export const deckDel = (...cards) => g => setDeck(drop(...cards)(deck(g)))(g);
-export const deckAdd = (...cards) => g => setDeck(add(...cards)(deck(g)))(g);
+export const deckDel = (...cards) => g => setDk(drop(...cards)(deck(g)))(g);
+export const deckAdd = (...cards) => g => setDk(add(...cards)(deck(g)))(g);
 
-export const draw = g => claim(next(g))(shiftDk(g));
+export const actDraw = g => actClaim(deckNext(g))(shiftDk(g));
