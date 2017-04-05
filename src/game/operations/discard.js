@@ -1,7 +1,5 @@
 import { Deck, } from 'bee52';
-import { discard, next, setDiscard as setDs, } from '../data';
-import { claim, } from './players';
-import { deckDel, } from './deck';
+import { discard, setDiscard as setDs, } from '../data';
 
 const { add, drop: dropD, drawTo: upTo, } = Deck;
 

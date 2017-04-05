@@ -33,4 +33,5 @@ export const drawTo = c => p => g => disDraw(...selectTo(c)(g))(p)(g);
 export const dropCards = (...cards) => p => g =>
   addPlr(scrap(...cards)(p))(drop(...cards)(g)); 
 
-export const claim = (...cards) => g => claimCards(...cards)(active(g))(g);
+export const actClaim = (...cards) => g => claimCards(...cards)(active(g))(g);
+export const claim = actClaim;

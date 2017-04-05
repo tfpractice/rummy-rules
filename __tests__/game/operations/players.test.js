@@ -3,7 +3,7 @@ import { Deck, } from 'bee52';
 import { hand, matches, player, } from 'src/player';
 import { active, deck, discard, game, players, setDiscard, } from 'src/game/data';
 import { disAdd, } from 'src/game/operations/discard';
-import { addPlr, claim, claimCards, deckDraw, disDraw, drawTo, dropCards, 
+import { actClaim, addPlr, claim, claimCards, deckDraw, disDraw, drawTo, dropCards, 
   hasPlr, isActive, mendPlr, pushPlr, rmPlr, rotate, scrapCards, turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
@@ -12,19 +12,19 @@ const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 const first6 = Deck.deck().slice(0, 6);
 
-const myGame = game([ dick, jane, ], (Deck.deck()), []);
+const myGame = game([dick, jane,], (Deck.deck()), []);
 
 describe('Player ops', () => {
   describe('rotate', () => {
     it('places the first element in an array at the end', () => {
-      expect(rotate([ 1, 2, 3, ])).toEqual([ 2, 3, 1, ]);
+      expect(rotate([1, 2, 3,])).toEqual([2, 3, 1,]);
       expect(rotate([])).toEqual([ ]);
       expect(rotate()).toEqual([ ]);
     });
   });
   describe('turn', () => {
     it('rotates the ggames players', () => {
-      expect(players(turn(myGame))).toEqual([ jane, dick, ]);
+      expect(players(turn(myGame))).toEqual([jane, dick,]);
     });
   });
   describe('hasPlr', () => {
@@ -65,6 +65,14 @@ describe('Player ops', () => {
       expect(players(claimCards(...first3)(jane)(myGame))).toBeArray();
       expect(hand(players(claimCards(...first3)(jane)(myGame)).find(matches(jane)))).toContain(...first3);
       expect(players(claimCards()()())).toBeArray();
+    });
+  }); 
+  
+  describe('actClaim', () => {
+    it('adds cards to the active players hand', () => {
+      expect(players(actClaim(...first3)(myGame))).toBeArray();
+      expect(hand(players(actClaim(...first3)(myGame)).find(matches(active(myGame))))).toContain(...first3);
+      expect(players(actClaim()())).toBeArray();
     });
   }); 
   describe('scrapCards', () => {
