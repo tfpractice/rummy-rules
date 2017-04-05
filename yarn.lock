@@ -741,9 +741,9 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bee52@^1.0.3-1:
-  version "1.0.3-5"
-  resolved "https://registry.yarnpkg.com/bee52/-/bee52-1.0.3-5.tgz#1f68b5ae8a84133a1bc5a4d5700c1a28ed2f68a2"
+bee52@^1.0.3-5:
+  version "1.0.3-6"
+  resolved "https://registry.yarnpkg.com/bee52/-/bee52-1.0.3-6.tgz#f458bd26b72155ff106e14ae9f86444b0d712626"
   dependencies:
     fenugreek-collections "^1.1.1"
     yarn "^0.21.3"
@@ -1362,8 +1362,8 @@ escope@^3.6.0:
     estraverse "^4.1.1"
 
 eslint-config-airbnb-base@^11.1.1:
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-11.1.2.tgz#259209a7678bf693e31cbe8f953f206b6aa7ccc3"
+  version "11.1.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-airbnb-base/-/eslint-config-airbnb-base-11.1.3.tgz#0e8db71514fa36b977fbcf977c01edcf863e0cf0"
 
 eslint-import-resolver-babel-module@^3.0.0:
   version "3.0.0"
