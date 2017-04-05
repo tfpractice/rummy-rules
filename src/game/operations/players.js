@@ -1,4 +1,4 @@
-import { filter, first, map, spread, } from 'fenugreek-collections';
+import { filter, first, } from 'fenugreek-collections';
 import { Deck, } from 'bee52';
 import { addHand, matches, scrap, update, xMatches, } from '../../player';
 import { active, players, setPlayers as setP, } from '../data';
@@ -34,6 +34,5 @@ export const dropCards = (...cards) => p => g =>
   addPlr(scrap(...cards)(p))(drop(...cards)(g)); 
 
 export const actClaim = (...cards) => g => claimCards(...cards)(active(g))(g);
-
-// export const claim = actClaim;
-export const actDrawNext = g => actClaim(deckNext(g))(shiftDk(g));
+export const actDrawNext = g => deckDraw(active(g))(g);
+export const actDrawTo = c => g => disDraw(c)(active(g))(g);
