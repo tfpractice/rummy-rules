@@ -1,6 +1,6 @@
 import { filter, first, } from 'fenugreek-collections';
 import { Deck, } from 'bee52';
-import { addHand, matches, scrap, update, xMatches, } from '../../player';
+import { addHand, hasID, matches, scrap, update,xMatches, } from '../../player';
 import { active, players, setPlayers as setP, } from '../data';
 import { disDel, drop, selectTo, } from './discard';
 import { deckNext, shiftDk, } from './deck';
@@ -12,6 +12,8 @@ export const isActive = g => p => matches(active(g))(p);
 export const rotate = arr => first(arr) ? [ ...rest(arr), first(arr), ] : [];
 export const turn = g => setP(rotate(players(g)))(g);
 
+export const playerByID = i => g => players(g).find(hasID(i));
+export const findPlr = p => g => players(g).find(matches(p));
 export const hasPlr = p => g => players(g).some(matches(p));
 export const mendPlr = p => g => setP(players(g).map(update(p)))(g);
 export const pushPlr = p => g => setP(players(g).concat(p))(g);

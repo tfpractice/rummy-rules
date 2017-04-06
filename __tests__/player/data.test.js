@@ -1,8 +1,8 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { addSet, draw, } from 'src/player/operations';
-import { copy, final, hand, id, matches, name, player, reset, score, setHand,
-  setID, setName, sets, setSets, update, xMatches, } from 'src/player/data';
+import { copy, final, hand, hasID, id, matches, name, player, reset, score, setHand, setID,
+  setName, sets, setSets, update, xHasID, xMatches, } from 'src/player/data';
 
 const myDeck = Deck.deck();
 const dick = draw(7)(myDeck.slice(7))(player('dick', [], [], 'dick'));
@@ -19,6 +19,7 @@ describe('Player', () => {
   });
   describe('copy', () => {
     it('returns a copy of the player', () => {
+      expect(copy(null)).toBeTruthy();  
       expect(copy(dick)).toEqual(dick);
     });
   });  
@@ -47,9 +48,20 @@ describe('Player', () => {
       expect(sets(setSets([ 3, 4, 5, ])(dick))).toEqual([ 3, 4, 5, ]);
     });
   });
+  describe('hasID', () => {
+    it('checks for id equivalence', () => {
+      expect(hasID(id(dick))(dick)).toBeTrue();
+    });
+  });
+  describe('xHasID', () => {
+    it('checks for id equivalence', () => {
+      expect(xHasID(id(dick))(jane)).toBeTrue();
+    });
+  });
   describe('matches', () => {
     it('checks for player id equality', () => {
-      expect(matches({})([])).toBeTruthy();
+      expect(matches({})({})).toBeTruthy();
+      expect(matches(null)()).toBeFalse();
       expect(matches(dick)(dick)).toBeTruthy();
       expect(matches(dick)(jane)).toBeFalse();
     });

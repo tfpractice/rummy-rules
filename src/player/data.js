@@ -14,10 +14,13 @@ export const setHand = h => p => player(name(p), spread(h), sets(p), id(p));
 export const setSets = s => p => player(name(p), hand(p), spread(s), id(p));
 export const setID = i => p => player(name(p), hand(p), sets(p), i);
 
-export const matches = next => p => id(next) === id(p);
+export const hasID = i => p => id(p) === i;
+export const xHasID = i => p => !hasID(i)(p);
+
+export const matches = next => p => !!next && hasID(id(next))(p);
 export const xMatches = next => p => !matches(next)(p);
 
-export const copy = p => player(name(p), hand(p), sets(p), id(p));
+export const copy = p => p ? player(name(p), hand(p), sets(p), id(p)) : player();
 export const update = next => p => matches(next)(p) ? copy(next) : p;
 export const reset = p => 
   [ setHand(), setSets(), ].reduce((res, fn) => fn(res), copy(p));

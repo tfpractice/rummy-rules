@@ -4,8 +4,8 @@ import { hand, matches, player, } from 'src/player';
 import { active, deck, discard, game, players, } from 'src/game/data';
 import { disAdd, } from 'src/game/operations/discard';
 import { actClaim, addPlr, claimCards, deckDraw, disDraw, drawTo, dropCards, 
-  hasPlr, isActive, mendPlr, pushPlr, rmPlr, rotate, scrapCards, turn, } 
-  from 'src/game/operations/players';
+  findPlr, hasPlr, isActive, mendPlr, playerByID, pushPlr, rmPlr, rotate,
+   scrapCards, turn, } from 'src/game/operations/players';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -33,6 +33,21 @@ describe('Player ops', () => {
       expect(hasPlr(dick)(myGame)).toBeTruthy();
       expect(hasPlr(bob)(myGame)).toBeFalse();
       expect(hasPlr()(myGame)).toBeFalsy();
+    });
+  });  
+  describe('findPlr', () => {
+    it('returns a matched player', () => {
+      expect(findPlr(dick)(myGame)).toBeTruthy();
+      expect(findPlr(bob)(myGame)).toBeFalsy();
+      expect(findPlr()(myGame)).toBeFalsy();
+    });
+  });
+  describe('playerByID', () => {
+    it('returns a matched player', () => {
+      expect(playerByID((dick.id))(myGame)).toBeTruthy();
+      expect(playerByID((bob.id))(myGame)).toBeFalsy();
+      expect(playerByID()(myGame)).toBeFalsy();
+      expect(playerByID(null)(myGame)).toBeFalsy();
     });
   });
   describe('isActive', () => {
