@@ -13,7 +13,9 @@ export const xMatches = next => s => !matches(next)(s);
 
 export const seqWith = c => deck => sequences(add(c)(deck)).filter(hasMatch(c));
 export const setWith = c => deck => rankSets(add(c)(deck)).filter(hasMatch(c));
+
 export const possibles = deck => [ ...sequences(deck), ...rankSets(deck), ];
+export const possWith = c => deck => filter(possibles(deck))(hasMatch(c));
 
 export const fullSeqs = deck => sequences(deck).filter(exceeds(2));
 export const fullSets = deck => rankSets(deck).filter(exceeds(2));
