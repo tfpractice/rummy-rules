@@ -98,8 +98,9 @@ describe('Player ops', () => {
   });
   describe('dropCards', () => {
     it('adds cards to a players hands', () => {
-      expect(players(dropCards(...first3)(jane)(myGame))).toBeArray();
-      expect(discard(dropCards(...first3)(jane)(myGame))).toContain(...first3);
+      expect(players(dropCards(...first3)(active(myGame))(myGame))).toBeArray();
+      expect(discard(dropCards(...first3)(active(myGame))(myGame))).toContain(...first3);
+      expect(discard(dropCards(...first3)(jane)(myGame))).not.toContain(...first3);
     });
   });
   describe('actClaim', () => {

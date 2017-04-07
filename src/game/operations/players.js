@@ -33,7 +33,7 @@ export const disDraw = (...cards) => p => g =>
 export const drawTo = c => p => g => disDraw(...selectTo(c)(g))(p)(g); 
 
 export const dropCards = (...cards) => p => g =>
-  addPlr(scrap(...cards)(p))(drop(...cards)(g)); 
+  isActive(g)(p) ? addPlr(scrap(...cards)(p))(drop(...cards)(g)) : g; 
 
 export const actClaim = (...cards) => g => claimCards(...cards)(active(g))(g);
 export const actDrawNext = g => deckDraw(active(g))(g);
