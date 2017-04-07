@@ -1,15 +1,14 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { allFit, canFit, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
- matches, playables, possFits, possibles, possWith, xMatches, } from 'src/sets/set';
+ isSet, matches, playables, possFits, possibles, possWith, xMatches, } from 'src/sets/set';
 import { hasMatch, } from 'src/deck';
 
-const { deck, } = Deck;
-const myDeck = (deck());
-const myHand = myDeck.slice(1, 7);
+const { deck, byRank, } = Deck;
+const myDeck = deck();
 const first = myDeck[0];
 const init2 = myDeck.slice(0, 2);
-const sixes = (myDeck.filter(c => c.rank === '6'));
+const sixes = byRank('6')(myDeck);
 const mySets = fullSets(myDeck);
 
 describe('fullSets', () => {
