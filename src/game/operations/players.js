@@ -30,6 +30,8 @@ export const deckDraw = p => g =>
 export const disDraw = (...cards) => p => g =>  
   isActive(g)(p) ? claimCards(...cards)(p)(disDel(...cards)(g)) : g;
 
+// export const canDraw =c=>p=>g=>
+// possWith(c)(hand(p)).some(playable(g))
 export const drawTo = c => p => g => disDraw(...selectTo(c)(g))(p)(g); 
 
 export const dropCards = (...cards) => p => g =>

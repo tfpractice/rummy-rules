@@ -6,8 +6,6 @@ import { addPlr, turn, } from './players';
 import { deckDel, } from './deck';
 import { disDel, } from './discard';
 
-const { add, } = Deck;
-
 export const actPlay = (...cards) => g => addSets(...cards)(active(g));
 
 export const claimSet = (...set) => p => g => addPlr(addSets(set)(p))(g);
@@ -19,11 +17,11 @@ export const playPartial = (...sets) => g => claimParts(...sets)(active(g))(g);
 export const playByType = set => g =>
   isFull(...set) ? playWhole(...set)(g) : playPartial(...set)(g);
 
-export const playable = (...cards) => g =>
+export const playable = cards => g =>
  [ isFull, allFit(allSets(g)), ].some(f => f(...cards));
 
 export const play = (...cards) => g =>
- playable(...cards)(g) ? turn(playByType(cards)(deckDel(...cards)(g))) : g;
+ playable(cards)(g) ? turn(playByType(cards)(deckDel(...cards)(g))) : g;
 
 export const rumCheck = g => possibles(discard(g)).some(hasFit(allSets(g)));
 export const rummable = g => playables(discard(g))(allSets(g));
