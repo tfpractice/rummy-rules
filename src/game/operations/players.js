@@ -33,10 +33,10 @@ export const disDraw = (...cards) => p => g =>
   isActive(g)(p) ? claimCards(...cards)(p)(disDel(...cards)(g)) : g;
 
 export const canPlayDraw = c => p => g =>
-   possWith(c)(add(...selectTo(c)(g))(hand(p))).some(playable(g));
+  possWith(c)(add(...selectTo(c)(g))(hand(p))).some(playable(g));
 
 export const drawable = c => p => g =>
-    isTop(c)(g) || possWith(c)(add(...selectTo(c)(g))(hand(p))).some(playable(g));
+  isTop(c)(g) || canPlayDraw(c)(p)(g);
 
 export const canDraw = c => p => g =>
   isActive(g)(p) && drawable(c)(p)(g);
