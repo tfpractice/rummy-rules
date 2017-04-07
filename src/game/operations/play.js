@@ -1,4 +1,5 @@
 import { Deck, } from 'bee52';
+import { spread, } from 'fenugreek-collections';
 import { allFit, hasFit, isFull, playables, possibles, } from '../../sets';
 import { addSets, } from '../../player';
 import { active, allSets, discard, } from '../data';
@@ -17,8 +18,8 @@ export const playPartial = (...sets) => g => claimParts(...sets)(active(g))(g);
 export const playByType = set => g =>
   isFull(...set) ? playWhole(...set)(g) : playPartial(...set)(g);
 
-export const playable = cards => g =>
- [ isFull, allFit(allSets(g)), ].some(f => f(...cards));
+export const playable = set => g =>
+ [ isFull, allFit(allSets(g)), ].some(f => f(...(spread(set))));
 
 export const play = (...cards) => g =>
  playable(cards)(g) ? turn(playByType(cards)(deckDel(...cards)(g))) : g;

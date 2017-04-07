@@ -34,6 +34,7 @@ describe('play', () => {
   describe('playable', () => {
     it('checks if a set of cards is playable', () => {
       expect(playable(first3)(myGame)).toBeTruthy();
+      expect(playable()(myGame)).toBeFalsy();
     });
   });
   describe('claimSet', () => {

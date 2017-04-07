@@ -1,8 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
-import { allFit, canFit, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
- isSet, matches, playables, possFits, possibles, possWith, xMatches, } from 'src/sets/set';
 import { hasMatch, } from 'src/deck';
+import { allFit, canFit, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
+ isSet, matches, playables, possFits, possibles, possWith, xMatches, }
+  from 'src/sets/set';
 
 const { deck, byRank, } = Deck;
 const myDeck = deck();
@@ -50,6 +51,7 @@ describe('fullSets', () => {
   });
   describe('isFull', () => {
     it('checks if an array of cards is a standalone set or seq', () => {
+      expect(isFull()).toBeFalsy();
       expect(isFull(...fullSets(myDeck)[0])).toBeTruthy();
     });
   });
@@ -58,12 +60,14 @@ describe('fullSets', () => {
       const [ fullFirst, ...fullRest ] = [ ...fullSets(myDeck)[0], ];
       const [ full0, full1, ...fullSlice ] = [ ...fullSeqs(myDeck)[0], ];
       
+      expect(canFit()(fullRest)).toBeFalse();
       expect(canFit(fullFirst)(fullRest)).toBeTruthy();
       expect(canFit(full0, full1,)(fullSlice)).toBeTruthy();
     });
   });
   describe('hasFit', () => {
     it('searches an array of sets for a place to fit a crad', () => {
+      expect(hasFit(fullSets(myDeck.slice(1)))()).toBeFalse();
       expect(hasFit(fullSets(myDeck.slice(1)))(first)).toBeTruthy();
     });
   });
