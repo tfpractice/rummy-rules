@@ -18,11 +18,11 @@ export const playPartial = (...sets) => g => claimParts(...sets)(active(g))(g);
 export const playByType = set => g =>
   isFull(...set) ? playWhole(...set)(g) : playPartial(...set)(g);
 
-export const playable = set => g =>
+export const playable = g => set =>
  [ isFull, allFit(allSets(g)), ].some(f => f(...(spread(set))));
 
 export const play = (...cards) => g =>
- playable(cards)(g) ? turn(playByType(cards)(deckDel(...cards)(g))) : g;
+ playable(g)(cards) ? turn(playByType(cards)(deckDel(...cards)(g))) : g;
 
 export const rumCheck = g => possibles(discard(g)).some(hasFit(allSets(g)));
 export const rummable = g => playables(discard(g))(allSets(g));

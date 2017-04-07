@@ -3,13 +3,15 @@ import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { deck, discard, game, } from 'src/game/data';
 import { deckNext, } from 'src/game/operations/deck';
+
+import { disAdd, disDel, disDelTo, disNext, drop, isTop, selectTo, } from 'src/game/operations/discard';
+
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 const first6 = Deck.deck().slice(0, 6);
 
-import { disAdd, disDel, disDelTo, drop, selectTo, } from 'src/game/operations/discard';
 const myGame = game([ dick, jane, ], Deck.deck(), []);
 
 describe('discard ops', () => {
@@ -26,6 +28,11 @@ describe('discard ops', () => {
   describe('selectTo', () => {
     it('returns all the cards in the discard pile up to the card', () => {
       expect(selectTo(deck(myGame)[2])((disAdd(...first6)(myGame))).length).toEqual(3);
+    });
+  });
+  describe('isTop', () => {
+    it('checks if the requested card is at the top of the discard', () => {
+      expect(isTop(disNext(myGame))(myGame)).toBeTruthy();
     });
   });
   describe('disDelTo', () => {

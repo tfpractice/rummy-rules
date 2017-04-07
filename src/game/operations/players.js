@@ -1,8 +1,10 @@
 import { filter, first, } from 'fenugreek-collections';
 import { Deck, } from 'bee52';
-import { addHand, hasID, matches, scrap, update, xMatches, } from '../../player';
+import { possWith, } from '../../sets';
+import { playable, } from './play';
+import { addHand, hand, hasID, matches, scrap, update, xMatches, } from '../../player';
 import { active, players, setPlayers as setP, } from '../data';
-import { disDel, drop, selectTo, } from './discard';
+import { disDel, drop, isTop, selectTo, } from './discard';
 import { deckNext, shiftDk, } from './deck';
 
 const { add, rest, } = Deck;
@@ -30,9 +32,17 @@ export const deckDraw = p => g =>
 export const disDraw = (...cards) => p => g =>  
   isActive(g)(p) ? claimCards(...cards)(p)(disDel(...cards)(g)) : g;
 
-// export const canDraw =c=>p=>g=>
-// possWith(c)(hand(p)).some(playable(g))
-export const drawTo = c => p => g => disDraw(...selectTo(c)(g))(p)(g); 
+export const canPlayDraw = c => p => g =>
+   possWith(c)(add(...selectTo(c)(g))(hand(p))).some(playable(g));
+
+export const drawable = c => p => g =>
+    isTop(c)(g) || possWith(c)(add(...selectTo(c)(g))(hand(p))).some(playable(g));
+
+export const canDraw = c => p => g =>
+  isActive(g)(p) && drawable(c)(p)(g);
+
+export const drawTo = c => p => g =>
+ canDraw(c)(p)(g) ? disDraw(...selectTo(c)(g))(p)(g) : g; 
 
 export const dropCards = (...cards) => p => g =>
   isActive(g)(p) ? addPlr(scrap(...cards)(p))(drop(...cards)(g)) : g; 

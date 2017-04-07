@@ -1,19 +1,29 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, matches, player, } from 'src/player';
-import { active, deck, discard, game, players, } from 'src/game/data';
+import { active, allSets, deck, discard, game,players, } from 'src/game/data';
 import { disAdd, } from 'src/game/operations/discard';
-import { actClaim, addPlr, claimCards, deckDraw, disDraw, drawTo, dropCards, 
-  findPlr, hasPlr, isActive, mendPlr, playerByID, pushPlr, rmPlr, rotate,
-   scrapCards, turn, } from 'src/game/operations/players';
-
+import { actClaim, addPlr, canDraw, canPlayDraw, claimCards, deckDraw, 
+  disDraw, drawTo, dropCards, findPlr, hasPlr, isActive, mendPlr, playerByID,
+   pushPlr, rmPlr, rotate, scrapCards, turn, } from 'src/game/operations/players';
+   
+import { claimSet, deckDel, play, playable, playPartial,playWhole, 
+  rumCheck, rumDrop, rummable, rummy, } from 'src/game/operations';
+    
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 const first6 = Deck.deck().slice(0, 6);
-
+const spade3 = Deck.deck()[40];
+const club2 = Deck.deck().splice(0, 1).pop();
+const club5 = Deck.deck().splice(3, 1).pop();
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
+const rumGame = game([ dick, jane, ], (Deck.deck().slice(9)), Deck.deck().slice(0, 9).concat(spade3));
+const d4 = deck(rumGame).slice(0, 4);
+const rClaim = actClaim(...d4)(deckDel(...d4)(rumGame)); 
+const queens = deck(rumGame).filter(c => c.rank === 'q');
+const rPlay = (playWhole(...d4)(rClaim));
 
 describe('Player ops', () => {
   describe('rotate', () => {
@@ -83,7 +93,6 @@ describe('Player ops', () => {
       expect(players(claimCards()()())).toBeArray();
     });
   }); 
-  
   describe('actClaim', () => {
     it('adds cards to the active players hand', () => {
       expect(players(actClaim(...first3)(myGame))).toBeArray();
@@ -128,12 +137,26 @@ describe('Player ops', () => {
       expect(discard(disDraw(first3[2])(dick)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
       expect(discard(disDraw(first3[2])(jane)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
     });
-  });
-  
+  });  
   describe('drawTo', () => {
     it('draws multiple cards into the active players hand', () => {
-      expect(discard(drawTo(first3[2])(dick)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
+      expect(discard(drawTo(first3[2])(jane)(disAdd(...first6)(myGame)))).not.toContain(first3[2]);
       expect(discard(drawTo(first3[2])(dick)(disAdd(...first6)(myGame))).length).not.toEqual(5);
+    });
+  });
+  describe('canPlayDraw', () => {
+    it('determins if a player can draw a card from discard', () => {
+      expect(canPlayDraw(club2)(active(rPlay))(rPlay)).toBeTrue();
+      expect(canPlayDraw(club5)(active(rPlay))(rPlay)).toBeTrue();
+      expect(canPlayDraw(spade3)(active(rPlay))(rPlay)).toBeFalse();
+    });
+  }); 
+  describe('canDraw', () => {
+    it('determins if a player can draw a card from discard', () => {
+      expect(canDraw(club2)(active(rPlay))(rPlay)).toBeTrue();
+      expect(canDraw(club2)(jane)(rPlay)).toBeFalse();
+      expect(canDraw(club5)(active(rPlay))(rPlay)).toBeTrue();
+      expect(canDraw(spade3)(active(rPlay))(rPlay)).toBeFalse();
     });
   });
 });
