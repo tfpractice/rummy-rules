@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hasMatch, } from 'src/deck';
-import { allFit, canFit, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
+import { allFit, canFit, canPlay, findFit, fullSeqs, fullSets,hasFit, isFull, isSeq,
  isSet, matches, playables, possFits, possibles, possWith, xMatches, }
   from 'src/sets/set';
 
@@ -55,51 +55,76 @@ describe('fullSets', () => {
       expect(isFull(...fullSets(myDeck)[0])).toBeTruthy();
     });
   });
-  describe('canFit', () => {
-    it('checks if a card will fit into a sequece or a set', () => {
-      const [ fullFirst, ...fullRest ] = [ ...fullSets(myDeck)[0], ];
-      const [ full0, full1, ...fullSlice ] = [ ...fullSeqs(myDeck)[0], ];
-      
-      expect(canFit()(fullRest)).toBeFalse();
-      expect(canFit(fullFirst)(fullRest)).toBeTruthy();
-      expect(canFit(full0, full1,)(fullSlice)).toBeTruthy();
+  fdescribe('fits', () => {
+    const deuces = fullSets(myDeck)[0];
+    const clubseq = fullSeqs(myDeck)[0];
+    const [ firstdeuce, ...restdeuce ] = (deuces);
+    const [ cl2, cl3, ...clubSlice ] = clubseq;
+
+    describe('canFit', () => {
+      it('checks if a card will fit into a sequece or a set', () => {
+      // console.log('restdeuce', restdeuce);
+      // console.log('firstdeuce', firstdeuce);
+      // console.log('cl2,cl3', cl2,cl3);
+      // console.log('canFit()(restdeuce)', canFit()(restdeuce));
+      // console.log('canFit(firstdeuce)(restdeuce)', canFit(firstdeuce)(restdeuce));
+        expect(canFit()(restdeuce)).toBeFalse();
+        expect(canFit(firstdeuce)(restdeuce)).toBeTruthy();
+        expect(canFit(cl2, cl3,)(clubSlice)).toBeTruthy();
+      });
     });
-  });
-  describe('hasFit', () => {
-    it('searches an array of sets for a place to fit a crad', () => {
-      expect(hasFit(fullSets(myDeck.slice(1)))()).toBeFalse();
-      expect(hasFit(fullSets(myDeck.slice(1)))(first)).toBeTruthy();
+    describe('hasFit', () => {
+      it('searches an array of sets for a place to fit a crad', () => {
+        expect(hasFit(fullSets(myDeck.slice(1)))()).toBeFalse();
+        expect(hasFit(fullSets(myDeck.slice(1)))(first)).toBeTruthy();
+        expect(hasFit(fullSets(myDeck.slice(2)))(...init2)).not.toBeTruthy();
+        expect(hasFit(fullSeqs(myDeck.slice(2)))(...init2)).toBeTruthy();
+      });
     });
-  });
-  describe('allFit', () => {
-    it('checks if all the porvided cards can fit into an arary of sets', () => {
-      expect(allFit(fullSeqs(myDeck.slice(2)))(init2)).toBeTruthy();
+    describe('allFit', () => {
+      it('checks if all the porvided cards can fit into an arary of sets', () => {
+        expect(allFit(fullSeqs(myDeck.slice(2)))(...init2)).toBeTruthy();
+        expect(allFit(fullSeqs(myDeck.slice(13)))(...init2)).toBeFalse();
+
+        // expect(allFit(fullSets(myDeck.slice(2)))(...init2)).toBeTruthy();
+      });
     });
-  });
-  describe('findFit', () => {
-    it('finds a set which can Fit a  card', () => {
-      expect(findFit(fullSets(myDeck.slice(2)))(myDeck[1])).toBeTruthy();
+    describe('findFit', () => {
+      it('finds a set which can Fit a  card', () => {
+        expect(findFit(fullSets(myDeck.slice(2)))(myDeck[1])).toBeTruthy();
+      });
     });
-  });
-  describe('possibles', () => {
-    it('retuns an array of sequences and sets', () => {
-      expect(possibles(myDeck)).toBeArray();
+    describe('possibles', () => {
+      it('retuns an array of sequences and sets', () => {
+        // console.log('possibles(myDeck)', possibles(myDeck));
+        expect(possibles(myDeck)).toBeArray();
+      });
     });
-  });
-  describe('possFits', () => {
-    it('checks a deck of cards for all possible fits in an array of sets ', () => {
-      expect(possFits(init2)(possibles(myDeck.slice(2)))).toBeArray();
+    describe('possFits', () => {
+      it('checks a deck of cards for all possible fits in an array of sets ', () => {
+        expect(possFits(init2)(possibles(myDeck.slice(2)))).toBeArray();
+      });
     });
-  });
-  describe('possWith', () => {
-    it('returns all possibles containing a specified card', () => {
-      expect(possWith(first)(myDeck).every(hasMatch(first))).toBeTrue();
-      expect(possibles(myDeck).every(hasMatch(first))).not.toBeTrue();
+    describe('possWith', () => {
+      it('returns all possibles containing a specified card', () => {
+        expect(possWith(first)(myDeck).every(hasMatch(first))).toBeTrue();
+        expect(possibles(myDeck).every(hasMatch(first))).not.toBeTrue();
+      });
     });
-  });
-  describe('playables', () => {
-    it('returns an arrays of playable cards', () => {
-      expect(playables(init2)(possibles(myDeck.slice(2)))).toContain(first);
+    describe('canPlay ', () => {
+      it('checks if a set is full or can be added to a given group of sets', () => {
+        expect(canPlay(possibles(myDeck.slice(2)))(init2)).toBeTrue(first);
+      });  
+    });
+    describe('playables', () => {
+      it('returns an arrays of playable cards', () => {
+        // console.log('init2', init2);
+        // console.log('myDeck.slice(2)', myDeck.slice(12));
+        // 
+        console.log('playables(init2)(possibles(myDeck.slice(2)))', playables(init2)(possibles(myDeck.slice(2))));
+        expect(playables(init2)(possibles(myDeck.slice(2)))).toContain(first);
+        expect(playables(init2)(possibles(myDeck.slice(13)))).toContain(first);
+      });
     });
   });
 });
