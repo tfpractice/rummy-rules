@@ -1,9 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
-import { allSets, deck, discard,game, } from 'src/game/data';
-import { actClaim, claimSet, deckDel, play, playable, playPartial,playWhole, rumCheck, rumDrop, rummable, rummy,
- } from 'src/game/operations';
+import { active, allSets, deck,discard,game, } from 'src/game/data';
+import { actClaim, claimSet, deckDel, isRummable, play, playable, rumCheck, 
+  rumDrop, rummable, rummy, } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -15,22 +15,9 @@ const rumGame = game([ dick, jane, ], (Deck.deck().slice(9)), Deck.deck().slice(
 const d4 = deck(rumGame).slice(0, 4);
 const rClaim = actClaim(...d4)(deckDel(...d4)(rumGame)); 
 const queens = deck(rumGame).filter(c => c.rank === 'q');
-const rPlay = (playWhole(...d4)(rClaim));
+const rPlay = (play(d4)(active(rClaim))(rClaim));
 
 describe('play', () => {
-  describe('playWhole', () => {
-    it('adds a set of cards to the active playerrs sets', () => {
-      expect(allSets(playWhole(...first3)(myGame)).length).toEqual(1);
-    });
-  });
-  describe('playPartial', () => {
-    it('plays a partial set of cards', () => {
-      const clubGame = playWhole(...first3)(myGame);
-      const next2 = deck(myGame).slice(3, 5);
-      
-      expect(allSets(playPartial(...next2)(clubGame)).length).toEqual(3);
-    });
-  });
   describe('playable', () => {
     it('checks if a set of cards is playable', () => {
       expect(playable(myGame)(first3)).toBeTruthy();
@@ -39,12 +26,12 @@ describe('play', () => {
   });
   describe('claimSet', () => {
     it('adds a set to the specified player', () => {
-      expect(allSets(claimSet(...first3)(jane)(myGame))).toBeArray();
+      expect(allSets(claimSet(first3)(jane)(myGame))).toBeArray();
     });
   });
   describe('play', () => {
     it('returns a new game with players changed', () => {
-      expect(allSets(play(...first3)(myGame))).toBeTruthy();
+      expect(allSets(play(first3)(active(myGame))(myGame))).toBeTruthy();
     });
   });
   describe('rumCheck', () => {
@@ -56,6 +43,11 @@ describe('play', () => {
   describe('rummable', () => {
     it('finds the cards that can be played', () => {
       expect(rummable(rPlay).length).toEqual(9);
+    });
+  });
+  describe('isRummable', () => {
+    it('checks if a card can be played', () => {
+      expect(isRummable(Deck.deck()[0])(rPlay)).toBeTruthy(); 
     });
   });
   describe('rumDrop', () => {
