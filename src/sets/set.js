@@ -28,20 +28,15 @@ export const isSet = s => some(rankSets(s))(matches(s));
 export const isFull1 = (...cards) => [ isSeq, isSet, ].some(f => f(cards));
 export const isFull = cards => exceeds(2)(cards) && some(definites(cards))(matches(cards));
 
-export const canFit = (aux = []) => (set = []) => isFull(flatten(set)(aux));
-export const hasFit = sets => aux => some(sets)(canFit(aux));
-export const anyFit = sets => c => some(sets)(canFit(c));
-export const anyFitBin = (sets = [], c) => anyFit(sets)(c);
+export const canFit = (poss = []) => (set = []) => isFull(flatten(set)(poss));
+export const hasFit = sets => poss => some(sets)(canFit(poss));
 
-export const allFit = sets => (...aux) => hasFit(sets)(aux);
-
-export const everyFit = (...cards) => sets => every(cards)(anyFit(sets));
 export const findFit = sets => c => sets.filter(canFit(c));
 
-export const canPlay = sets => poss => [ isFull1, hasFit(sets), ].some(f => f(...poss));
+export const canPlay = sets => poss => [ isFull, hasFit(sets), ].some(f => f(poss));
 
-export const playables = deck => sets => 
-  filter(possibles(deck))(hasFit(sets)).reduce(unionBin, []);
+export const playables = sets => deck =>  
+  filter(possibles(deck))(canPlay(sets)).reduce(unionBin, []);
 
-export const possFits = deck => sets => 
+export const possFits = sets => deck =>  
   possibles(deck).map(findFit(sets)).reduce(flat, []);
