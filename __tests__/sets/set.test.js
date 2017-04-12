@@ -1,7 +1,9 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hasMatch, } from 'src/deck';
-import { allFit, canFit, canFitBin, canPlay, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
+import { cGraph, joinAdj, joinSet, rankSets, seqGraph, sequences, setGraph, } 
+from 'src/deck/join';
+import { allFit, canFit, canFitBin, canPlay,definites, findFit, fullSeqs, fullSets, hasFit, isFull, isSeq,
  isSet, matches, playables, possFits, possibles, possWith, xMatches, }
   from 'src/sets/set';
 
@@ -35,25 +37,30 @@ describe('fullSets', () => {
       expect(fullSeqs(myDeck).every(x => [ ...x, ].length > 2)).toBeTruthy();
     });
   });
+  describe('definites', () => {
+    it('returns all possibles with lenth greater than 2', () => {
+      expect(definites(myDeck).every(x => [ ...x, ].length > 2)).toBeTruthy();
+    });
+  });
   
   describe('isSeq', () => {
-    it('checks if every card is in the first full seq', () => {
+    it('checks if all the cards are rankAdjacent', () => {
       expect(isSeq(fullSeqs(myDeck)[0])).toBeTruthy();
-      expect(isSeq([ ...fullSeqs(myDeck)[0], ].splice(0, 2))).toBeFalse();
+      expect(isSeq([ ...fullSeqs(myDeck)[0], ].splice(0, 2))).toBeTrue();
       expect(isSeq([ first, myDeck[15], ])).toBeFalse();
     });
   });
   describe('isSet', () => {
-    it('checks if every card is in the first full seq', () => {
+    it('checks ifall the cards are of the same rank', () => {
       expect(isSet(fullSets(myDeck)[0])).toBeTruthy();
-      expect(isSet([ ...fullSets(myDeck)[0], ].splice(0, 2))).toBeFalse();
+      expect(isSet([ ...fullSets(myDeck)[0], ].splice(0, 2))).toBeTrue();
       expect(isSet([ first, myDeck[15], ])).toBeFalse();
     });
   });
   describe('isFull', () => {
     it('checks if an array of cards is a standalone set or seq', () => {
       expect(isFull()).toBeFalsy();
-      expect(isFull(...fullSets(myDeck)[0])).toBeTruthy();
+      expect(isFull(fullSets(myDeck)[0])).toBeTruthy();
     });
   });
   describe('fits', () => {
@@ -65,15 +72,11 @@ describe('fullSets', () => {
     
     describe('canFit', () => {
       it('checks if a card will fit into a sequece or a set', () => {
+        expect(canFit()()).toBeFalse();
         expect(canFit()(restdeuce)).toBeTrue();
+        expect(canFit(restdeuce)()).toBeTrue();
         expect(canFit(firstdeuce)(restdeuce)).toBeTruthy();
-        expect(canFit(cl2, cl3,)(clubSlice)).toBeTruthy();
-      });
-    }); describe('canFitBin', () => {
-      it('checks if a card will fit into a sequece or a set', () => {
-        expect(canFitBin(restdeuce,)).toBeFalse();
-        expect(canFitBin(restdeuce, firstdeuce)).toBeTruthy();
-        expect(canFitBin(clubSlice, cl2)).toBeTruthy();
+        expect(canFit([ cl2, cl3, ])(clubSlice)).toBeTruthy();
       });
     });
     describe('hasFit', () => {

@@ -5,7 +5,7 @@ import { byAdj, bySet, } from './filter';
 const { graph,addEdges, nodes, } = Graph;
 const { componentSet: compSet, } = Components;
 
-export const cGraph = cards => graph(...cards);
+export const cGraph = (cards = []) => graph(...cards);
 
 export const joinAdj = (g, c) => addEdges(g)(c, 0)(...byAdj(c)(nodes(g)));
 export const joinSet = (g, c) => addEdges(g)(c, 0)(...bySet(c)(nodes(g)));
