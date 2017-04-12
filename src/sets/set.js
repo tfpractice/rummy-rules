@@ -4,7 +4,7 @@ from 'fenugreek-collections';
 import { hasMatch, rankSets, sequences, } from '../deck';
 import { exceeds, len, } from './utils';
 
-const { draw, add, diff, contains, union,unionBin, } = Deck;
+const { draw, add, diff, contains, union, unionBin, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
 
@@ -22,11 +22,10 @@ export const definites = deck => filter(possibles(deck))(exceeds(2));
 
 export const possWith = c => deck => filter(possibles(add(c)(deck)))(hasMatch(c));
 
-export const isSeq = s => some(sequences(s))(matches(s));
-export const isSet = s => some(rankSets(s))(matches(s));
+export const isSeq = s => exceeds(1)(s) && some(sequences(s))(matches(s));
+export const isSet = s => exceeds(1)(s) && some(rankSets(s))(matches(s));
 
-export const isFull1 = (...cards) => [ isSeq, isSet, ].some(f => f(cards));
-export const isFull = cards => exceeds(2)(cards) && some(definites(cards))(matches(cards));
+export const isFull = poss => exceeds(2)(poss) && some(definites(poss))(matches(poss));
 
 export const canFit = (poss = []) => (set = []) => isFull(flatten(set)(poss));
 export const hasFit = sets => poss => some(sets)(canFit(poss));
