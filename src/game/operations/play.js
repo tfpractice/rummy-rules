@@ -1,5 +1,5 @@
 import { spread, } from 'fenugreek-collections';
-import { allFit, canPlay,hasFit, isFull, playables, possibles, } from '../../sets';
+import { canPlay,hasFit, isFull, playables, possibles, } from '../../sets';
 import { addSets, } from '../../player';
 import { active, allSets, discard, } from '../data';
 import { addPlr, turn, } from './players';
