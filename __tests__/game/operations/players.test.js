@@ -1,14 +1,14 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, matches, player, } from 'src/player';
-import { active, allSets, deck, discard, game,players, } from 'src/game/data';
+import { active, allSets, deck, discard, game, players, } from 'src/game/data';
 import { disAdd, } from 'src/game/operations/discard';
-import { actClaim, addPlr, canDraw, canPlayDraw, claimCards, deckDraw, 
-  disDraw, drawTo, dropCards, findPlr, hasPlr, isActive, mendPlr, playerByID,
+import { actClaim, addPlr, canDraw, canPlayDraw, claimCards, deckDraw, disDraw, 
+  drawable, drawTo, dropCards, findPlr, hasPlr, isActive, mendPlr, playerByID,
    pushPlr, rmPlr, rotate, scrapCards, turn, } from 'src/game/operations/players';
-   
+
 import { claimSet, deckDel, play, } from 'src/game/operations';
-    
+
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
 const bob = player('bob', [], [], 'bob');
@@ -145,11 +145,18 @@ describe('Player ops', () => {
   });
   describe('canPlayDraw', () => {
     it('determins if a player can draw a card from discard', () => {
-      expect(canPlayDraw(club2)(active(rPlay))(rPlay)).toBeTrue();
       expect(canPlayDraw(club5)(active(rPlay))(rPlay)).toBeTrue();
+      expect(canPlayDraw(club2)(active(rPlay))(rPlay)).toBeTrue();
       expect(canPlayDraw(spade3)(active(rPlay))(rPlay)).toBeFalse();
     });
   }); 
+  describe('drawable', () => {
+    it('checks if a card is the top card or can be played as part of a set', () => {
+      expect(drawable(club5)(active(rPlay))(rPlay)).toBeTrue();
+      expect(drawable(club2)(active(rPlay))(rPlay)).toBeTrue();
+      expect(drawable(spade3)(active(rPlay))(rPlay)).toBeFalse();
+    });
+  });
   describe('canDraw', () => {
     it('determins if a player can draw a card from discard', () => {
       expect(canDraw(club2)(active(rPlay))(rPlay)).toBeTrue();
