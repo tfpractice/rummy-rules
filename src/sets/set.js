@@ -1,10 +1,9 @@
 import { Deck, } from 'bee52';
-import { every, filter, first, flattenBin as flat, flatten, some, spread, } 
-from 'fenugreek-collections';
+import { filter, flattenBin as flat, flatten, some, spread, } from 'fenugreek-collections';
 import { hasMatch, rankSets, sequences, } from '../deck';
 import { exceeds, len, } from './utils';
 
-const { draw, add, diff, contains, union, unionBin, } = Deck;
+const { draw, add, diff, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
 
@@ -30,12 +29,10 @@ export const isFull = poss => exceeds(2)(poss) && some(definites(poss))(matches(
 export const canFit = (poss = []) => (set = []) => isFull(flatten(set)(poss));
 export const hasFit = sets => poss => some(sets)(canFit(poss));
 
-export const findFit = sets => c => sets.filter(canFit(c));
+export const findFit = sets => poss => sets.filter(canFit(poss));
 
 export const canPlay = sets => poss => [ isFull, hasFit(sets), ].some(f => f(poss));
 
-export const playables = sets => deck =>  
-  filter(possibles(deck))(canPlay(sets)).reduce(unionBin, []);
+export const playables = sets => deck => filter(possibles(deck))(canPlay(sets));
 
-export const possFits = sets => deck =>  
-  possibles(deck).map(findFit(sets)).reduce(flat, []);
+export const possFits = sets => deck => possibles(deck).map(findFit(sets)).reduce(flat, []);

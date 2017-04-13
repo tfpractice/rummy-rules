@@ -14,13 +14,13 @@ const mySets = fullSets(myDeck);
 
 describe('fullSets', () => {
   describe('matches', () => {
-    it('checks if the lenght of the difference is 0', () => {
+    it('checks if the length of the difference is 0', () => {
       expect(matches(mySets[0])(mySets[0])).toBeTrue();
       expect(matches(mySets[0])(mySets[1])).toBeFalse();
     });
   }); 
   describe('xMatches', () => {
-    it('checks if the lenght of the difference is 0', () => {
+    it('checks if the length of the difference is 0', () => {
       expect(xMatches(mySets[0])(mySets[0])).toBeFalse();
       expect(xMatches(mySets[0])(mySets[1])).toBeTrue();
     });
@@ -113,8 +113,8 @@ describe('fullSets', () => {
     });
     describe('playables', () => {
       it('returns an arrays of playable cards', () => {
-        expect(playables(possibles(myDeck.slice(2)))(init2)).toContain(first);
-        expect(playables(possibles(myDeck.slice(13)))(init2)).toContain(first);
+        expect(playables(possibles(myDeck.slice(2)))(init2).length).toBe(3);
+        expect(playables(possibles(myDeck.slice(13)))(init2).length).toBe(2);
       });
     });
   });
