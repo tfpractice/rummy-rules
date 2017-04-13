@@ -45,7 +45,7 @@ describe('Player', () => {
   });
   describe('addSets', () => {
     it('plays multiple sets', () => {
-      expect(sets(addSets(1, 2, 3)(dick))).toBeArray();
+      expect(sets(addSets([ 1, ], [ 2, ], [ 3, ])(dick))).toBeArray();
     });
   });
 });
