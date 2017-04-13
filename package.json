@@ -1,6 +1,6 @@
 {
   "name": "rummy-rules",
-  "version": "1.0.1-8",
+  "version": "1.0.1-9",
   "description": "a set of functions to implement the basic rules of the card game rummy Edit",
   "main": "dist/bundle.cjs.js",
   "browser": "dist/bundle.umd.js",
