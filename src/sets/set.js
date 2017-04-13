@@ -3,7 +3,7 @@ import { filter, flattenBin as flat, flatten, some, spread, } from 'fenugreek-co
 import { hasMatch, rankSets, sequences, } from '../deck';
 import { exceeds, len, } from './utils';
 
-const { draw, add, diff, } = Deck;
+const { draw, add, diff, unionBin, } = Deck;
 
 export const hand = deck => draw(7)(spread(deck));
 
@@ -33,6 +33,7 @@ export const findFit = sets => poss => sets.filter(canFit(poss));
 
 export const canPlay = sets => poss => [ isFull, hasFit(sets), ].some(f => f(poss));
 
-export const playables = sets => deck => filter(possibles(deck))(canPlay(sets));
+export const plays = sets => deck => filter(possibles(deck))(canPlay(sets));
+export const playables = sets => deck => plays(sets)(deck).reduce(unionBin, []);
 
 export const possFits = sets => deck => possibles(deck).map(findFit(sets)).reduce(flat, []);

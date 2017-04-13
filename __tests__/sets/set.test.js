@@ -2,7 +2,7 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hasMatch, } from 'src/deck';
 import { canFit, canPlay,definites, findFit, fullSeqs, fullSets, hasFit, isFull,
-   isSeq,isSet, matches, playables, possFits, possibles, possWith, xMatches, }
+   isSeq,isSet, matches, playables, plays,possFits, possibles, possWith, xMatches, }
   from 'src/sets/set';
 
 const { deck, byRank, } = Deck;
@@ -111,9 +111,15 @@ describe('fullSets', () => {
         expect(canPlay(possibles(myDeck.slice(2)))(init2[1])).toBeTrue();
       });  
     });
+    describe('plays', () => {
+      it('returns an arrays of plays given already composed sets', () => {
+        expect(plays(possibles(myDeck.slice(2)))(init2).length).toBe(3);
+        expect(plays(possibles(myDeck.slice(13)))(init2).length).toBe(2);
+      });
+    });
     describe('playables', () => {
-      it('returns an arrays of playable cards', () => {
-        expect(playables(possibles(myDeck.slice(2)))(init2).length).toBe(3);
+      it('retuns an array of playable cards given already composed sets', () => {
+        expect(playables(possibles(myDeck.slice(2)))(init2).length).toBe(2);
         expect(playables(possibles(myDeck.slice(13)))(init2).length).toBe(2);
       });
     });

@@ -2,8 +2,8 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { active, allSets, deck, discard, game, } from 'src/game/data';
-import { actClaim, claimSet, deckDel, isRummable, play, playable, rumCheck, 
-  rumDrop, rummable, rummy, } from 'src/game/operations';
+import { actClaim, claimSet, clearCards, deckDel, isRummable, play, playable, 
+  rumCheck, rumDrop, rummable,rummy, } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
@@ -18,14 +18,15 @@ const queens = deck(rumGame).filter(c => c.rank === 'q');
 const rPlay = (play(d4)(active(rClaim))(rClaim));
 
 describe('play', () => {
-  describe('playable', () => {
-    it('checks if a set of cards is playable', () => {
-      // expect(playable(myGame)(first3)).toBeTruthy();
-      // expect(playable(myGame)()).toBeFalsy();
+  describe('clearCards', () => {
+    it('removes cards form both the deck and the discard ', () => {
+      expect(deck(clearCards(...first3)(myGame))).not.toContain(...first3);
+      expect(discard(clearCards(...first3)(myGame))).not.toContain(...first3);
     });
   });
   describe('claimSet', () => {
     it('adds a set to the specified player', () => {
+      claimSet(first3.slice(1))(jane)(myGame);
       expect(allSets(claimSet(first3)(jane)(myGame))).toBeArray();
     });
   });
