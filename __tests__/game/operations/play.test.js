@@ -2,12 +2,11 @@ import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { player, } from 'src/player';
 import { active, allSets, deck, discard, game, } from 'src/game/data';
-import { actClaim, claimSet, clearCards, deckDel, isRummable, play, playable, 
-  rumCheck, rumDrop, rummable,rummy, } from 'src/game/operations';
+import { actClaim, claimSet, clearCards, deckDel, isRummable, play, playable, rumCheck, 
+  rumDrop, rummable, rummy,rumSets, } from 'src/game/operations';
 
 const dick = player('dick', [], [], 'dick');
 const jane = player('jane', [], [], 'jane');
-const bob = player('bob', [], [], 'bob');
 const first3 = Deck.deck().slice(0, 3);
 
 const myGame = game([ dick, jane, ], (Deck.deck()), []);
@@ -41,6 +40,11 @@ describe('play', () => {
       expect(rumCheck(rPlay)).toBeTrue();
     });
   });
+  describe('rumSets', () => {
+    it('returns al of the playable sets in the discrad pile', () => {
+      expect(rumSets(rPlay).length).toEqual(3);
+    });
+  });
   describe('rummable', () => {
     it('finds the cards that can be played', () => {
       expect(rummable(rPlay).length).toEqual(9);
@@ -48,7 +52,7 @@ describe('play', () => {
   });
   describe('isRummable', () => {
     it('checks if a card can be played', () => {
-      expect(isRummable(Deck.deck()[0])(rPlay)).toBeTruthy(); 
+      expect(isRummable(rPlay)(Deck.deck()[0])).toBeTruthy(); 
     });
   });
   describe('rumDrop', () => {
@@ -58,8 +62,8 @@ describe('play', () => {
   });
   describe('rummy', () => {
     it('adds any rummable cards to the callers sets', () => {
-      expect(rummable(rummy(jane)(rPlay)).length).toEqual(0);
-      expect(discard(rummy(jane)(rPlay))).not.toContain(rummable(rPlay)[0]);
+      expect(rumSets(rummy(rumSets(rPlay)[0])(jane)(rPlay)).length).toEqual(0);
+      expect(discard(rummy(rumSets(rPlay)[0])(jane)(rPlay))).not.toContain(rummable(rPlay));
     });
   });
 });

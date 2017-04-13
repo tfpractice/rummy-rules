@@ -20,10 +20,6 @@ export const copy = g => game(players(g), deck(g), discard(g), id(g));
 export const reset = g => [ setPlayers(map(players(g))(reset_p)),
   setDiscard(), setDeck(), ].reduce((res, f) => f(res), copy(g));
 
-// 
-// export const next = g => Deck.next(deck(g));
-// export const rest = g => Deck.rest(deck(g));
-
 export const active = g => first(players(g));
 export const passive = g => players(g).slice(1);
 

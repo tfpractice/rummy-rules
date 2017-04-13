@@ -1,7 +1,7 @@
 import 'jasmine-expect';
 import { Deck, } from 'bee52';
 import { hand, matches, player, } from 'src/player';
-import { active, allSets, deck, discard, game, players, } from 'src/game/data';
+import { active, deck, discard, game, players, } from 'src/game/data';
 import { disAdd, } from 'src/game/operations/discard';
 import { actClaim, addPlr, canDraw, canPlayDraw, claimCards, deckDraw, disDraw, 
   drawable, drawTo, dropCards, findPlr, hasPlr, isActive, mendPlr, playerByID,
